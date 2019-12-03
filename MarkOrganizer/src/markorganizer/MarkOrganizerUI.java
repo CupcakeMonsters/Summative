@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package markorganizer;
-
+import java.io.*;
 /**
  *
  * @author S331469627
@@ -12,15 +12,22 @@ package markorganizer;
 import javax.swing.*;
 import javax.swing.DefaultListModel;
 public class MarkOrganizerUI extends javax.swing.JFrame {
-    static String[] ar = {"One", "Two"};
     DefaultListModel edit = new DefaultListModel();
+    public String [][] students;
     
     /**
      * Creates new form MarkOrganizerUI
      */
     public MarkOrganizerUI() {
-        edit.addElement("one");
-        edit.addElement("two");
+        FileSetup.start();
+        try{
+        students = FileSetup.read();
+        } catch(IOException e){}
+        
+        for(String[] stud : students){
+            edit.addElement(stud[0]);
+        }
+        
         initComponents();
     }
 
@@ -84,8 +91,13 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         //being able to manipulate the data in a selected box of a list on screen
         String item = jList1.getSelectedValue();
         int position = jList1.locationToIndex(evt.getPoint());
-        edit.setElementAt("Hello", position);
-        System.out.println(item);
+        
+        for(String[] stud : students){
+            if (item.equals(stud[0])){
+                System.out.println(stud[1]);
+            }
+        }
+        
     }//GEN-LAST:event_jList1MouseClicked
 
     /**
