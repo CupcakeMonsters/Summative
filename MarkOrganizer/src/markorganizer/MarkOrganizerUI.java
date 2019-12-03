@@ -89,14 +89,10 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         //being able to manipulate the data in a selected box of a list on screen
-        String item = jList1.getSelectedValue();
+        //String item = jList1.getSelectedValue();
         int position = jList1.locationToIndex(evt.getPoint());
         
-        for(String[] stud : students){
-            if (item.equals(stud[0])){
-                System.out.println(stud[1]);
-            }
-        }
+        System.out.println(students[position][1]);
         
     }//GEN-LAST:event_jList1MouseClicked
 
