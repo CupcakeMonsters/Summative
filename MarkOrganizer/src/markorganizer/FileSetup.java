@@ -26,7 +26,7 @@ public class FileSetup {
     }
     
     public static String[][] read() throws IOException{
-        String[][] students = new String[3][2];
+        String[][] students = new String[3][100];//3 -> number of lines in selected data file
         String currStudent = "PlaceHolder";
         int counter = 0;
         
