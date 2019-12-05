@@ -14,13 +14,14 @@ import javax.swing.DefaultListModel;
 public class MarkOrganizerUI extends javax.swing.JFrame {
     DefaultListModel edit = new DefaultListModel();
     public String [][] students;
-    
+    NumberOfUnits close = new NumberOfUnits();
     /**
      * Creates new form MarkOrganizerUI
      */
     public MarkOrganizerUI() {
         FileSetup.start();
         try{
+        
         students = FileSetup.read();
         } catch(IOException e){}
         
@@ -91,9 +92,10 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         //being able to manipulate the data in a selected box of a list on screen
         //String item = jList1.getSelectedValue();
         int position = jList1.locationToIndex(evt.getPoint());
-        
         System.out.println(students[position][1]);
-        
+        this.setVisible(false);
+        NumberOfUnits close = new NumberOfUnits();
+        close.setVisible(true);
     }//GEN-LAST:event_jList1MouseClicked
 
     /**
