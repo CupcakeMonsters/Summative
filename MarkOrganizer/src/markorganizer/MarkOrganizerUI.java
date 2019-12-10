@@ -22,6 +22,13 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         FileSetup.start();
         try{
         students = FileSetup.read();
+        /*
+        for(String[] i:students){
+            for(String z: i){
+                System.out.println(z);
+            }
+        }
+        */
         } catch(IOException e){}
         
         for(String[] stud : students){
