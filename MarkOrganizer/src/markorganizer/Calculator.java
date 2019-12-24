@@ -9,8 +9,11 @@ package markorganizer;
  *
  * @author Zohra
  */
-public class Calculator extends javax.swing.JFrame {
 
+import java.util.ArrayList; 
+public class Calculator extends javax.swing.JFrame {
+ArrayList<Double> testmarks = new ArrayList<Double>();
+ArrayList<Double> quizmarks = new ArrayList<Double>();
     /**
      * Creates new form Calculator
      */
@@ -178,6 +181,7 @@ public class Calculator extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
         
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -190,11 +194,21 @@ public class Calculator extends javax.swing.JFrame {
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
-        
-        double testPercent = Double.parseDouble(jTextField1.getText());
-        double quizPercent1 = Double.parseDouble(jTextField2.getText()); //still need to put a try catch here
-        double quizPercent2 = Double.parseDouble(jTextField3.getText());
-        
+        if(jTextField1.getText().isEmpty()){
+            jTextField1.setText("You must input at least a test mark");
+        }else if(jTextField2.getText().isEmpty()){
+        testmarks.add(Double.parseDouble(jTextField1.getText()));
+        quizmarks.add(Double.parseDouble(jTextField3.getText()));
+        }else if(jTextField3.getText().isEmpty()){
+        testmarks.add(Double.parseDouble(jTextField1.getText()));
+        quizmarks.add(Double.parseDouble(jTextField2.getText()));
+        }else if(jTextField2.getText().isEmpty() && jTextField3.getText().isEmpty()){
+        testmarks.add(Double.parseDouble(jTextField1.getText()));
+        }else{
+        testmarks.add(Double.parseDouble(jTextField1.getText()));
+        testmarks.add(Double.parseDouble(jTextField2.getText()));
+        testmarks.add(Double.parseDouble(jTextField3.getText()));
+        }
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     /**
