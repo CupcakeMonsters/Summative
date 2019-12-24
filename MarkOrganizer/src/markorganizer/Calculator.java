@@ -14,7 +14,15 @@ import java.util.ArrayList;
 public class Calculator extends javax.swing.JFrame {
 ArrayList<Double> testmarks = new ArrayList<Double>();
 ArrayList<Double> quizmarks = new ArrayList<Double>();
-    /**
+ArrayList<String> testmarksstring = new ArrayList<String>();
+ArrayList<String> quizmarksstring = new ArrayList<String>();
+double testaverage;
+double quizaverage;
+String testaverageString;
+String quizaverageString;
+double testTotal = 0;
+double quizTotal = 0;
+/**
      * Creates new form Calculator
      */
     public Calculator() {
@@ -77,6 +85,11 @@ ArrayList<Double> quizmarks = new ArrayList<Double>();
         });
 
         jToggleButton1.setText("Finish and display average");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         jToggleButton2.setText("Continue?");
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +172,7 @@ ArrayList<Double> quizmarks = new ArrayList<Double>();
                     .addComponent(jLabel5)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,7 +208,7 @@ ArrayList<Double> quizmarks = new ArrayList<Double>();
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
         if(jTextField1.getText().isEmpty()){
-            jTextField1.setText("You must input at least a test mark");
+        jTextField1.setText("You must input at least a test mark");
         }else if(jTextField2.getText().isEmpty()){
         testmarks.add(Double.parseDouble(jTextField1.getText()));
         quizmarks.add(Double.parseDouble(jTextField3.getText()));
@@ -209,12 +222,26 @@ ArrayList<Double> quizmarks = new ArrayList<Double>();
         testmarks.add(Double.parseDouble(jTextField2.getText()));
         testmarks.add(Double.parseDouble(jTextField3.getText()));
         }
+        
     }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        for(int c = 0; c<testmarks.size(); c++){
+            testTotal += testmarks.get(c);
+            do{
+                quizTotal += quizmarks.get(c);
+            }while(c<quizmarks.size());
+        }
+        jTextField4.setText(String.valueOf(testaverage = testTotal/testmarks.size()));
+        jTextField5.setText(String.valueOf(quizaverage = quizTotal/quizmarks.size()));
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        Calculator ec = new Calculator();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -244,6 +271,7 @@ ArrayList<Double> quizmarks = new ArrayList<Double>();
                 new Calculator().setVisible(true);
             }
         });
+        quizaverageString = String.valueOf(quizaverage);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
