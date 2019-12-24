@@ -104,6 +104,12 @@ double quizTotal = 0;
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Quiz average is: ");
 
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
+
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("than test average");
 
@@ -234,8 +240,17 @@ double quizTotal = 0;
             }while(c<quizmarks.size());
         }
         jTextField4.setText(String.valueOf(testaverage = testTotal/testmarks.size()));
-        jTextField5.setText(String.valueOf(quizaverage = quizTotal/quizmarks.size()));
+        if(quizaverage>testaverage){
+            jTextField5.setText("higher");
+        }else{
+            jTextField5.setText("lower");
+        }
+        
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,7 +286,9 @@ double quizTotal = 0;
                 new Calculator().setVisible(true);
             }
         });
-        quizaverageString = String.valueOf(quizaverage);
+        ec.quizaverageString = String.valueOf(ec.quizaverage);
+        ec.testaverageString = String.valueOf(ec.testaverage);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
