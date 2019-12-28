@@ -12,11 +12,13 @@ package markorganizer;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList; 
+import java.util.concurrent.TimeUnit;
 public class Calculator extends javax.swing.JFrame {
 ArrayList<Double> testmarks = new ArrayList<Double>();
 ArrayList<Double> quizmarks = new ArrayList<Double>();
 ArrayList<String> testmarksstring = new ArrayList<String>();
 ArrayList<String> quizmarksstring = new ArrayList<String>();
+ArrayList<Double> testmarkssorted = new ArrayList<Double>();
 double testaverage;
 double quizaverage;
 String testaverageString;
@@ -24,6 +26,9 @@ String quizaverageString;
 double testTotal = 0;
 double quizTotal = 0;
 String testworth;
+double holder;
+double temp;
+double median;
 /**
      * Creates new form Calculator
      */
@@ -58,6 +63,9 @@ String testworth;
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,6 +135,17 @@ String testworth;
 
         jLabel10.setText("/100");
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setText("Test median is:");
+
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("/100");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -159,6 +178,10 @@ String testworth;
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField6))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField4))
@@ -169,7 +192,8 @@ String testworth;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel10))))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel12))))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -205,7 +229,12 @@ String testworth;
                     .addComponent(jLabel5)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -217,8 +246,8 @@ String testworth;
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -246,31 +275,69 @@ String testworth;
         jTextField2.setText("");
         jTextField3.setText("");
         }else if(jTextField2.getText().isEmpty()){
+        try{
         testmarks.add(Double.parseDouble(jTextField1.getText()));
         quizmarks.add(Double.parseDouble(jTextField3.getText()));
+        }catch(NumberFormatException e){
+        jTextField1.setText("Enter");
+        jTextField2.setText("a number");
+        jTextField3.setText("as a mark");
+        }
+        try{
+            TimeUnit.SECONDS.sleep(5);
+        } catch(InterruptedException a) { 
+           Thread.currentThread().interrupt(); 
+        }
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
         }else if(jTextField3.getText().isEmpty()){
+        try{
         testmarks.add(Double.parseDouble(jTextField1.getText()));
         quizmarks.add(Double.parseDouble(jTextField2.getText()));
+        }catch(NumberFormatException e){
+        jTextField1.setText("Enter");
+        jTextField2.setText("a number");
+        jTextField3.setText("as a mark");
+        }
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
         }else if(jTextField2.getText().isEmpty() && jTextField3.getText().isEmpty()){
+        try{
         testmarks.add(Double.parseDouble(jTextField1.getText()));
+        }catch(NumberFormatException e){
+        jTextField1.setText("Enter");
+        jTextField2.setText("a number");
+        jTextField3.setText("as a mark");
+        }
+        try{
+            TimeUnit.SECONDS.sleep(5);
+        } catch(InterruptedException a) { 
+           Thread.currentThread().interrupt(); 
+        }
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
         }else{
+        try{
         testmarks.add(Double.parseDouble(jTextField1.getText()));
         quizmarks.add(Double.parseDouble(jTextField2.getText()));
         quizmarks.add(Double.parseDouble(jTextField3.getText()));
+        }catch(NumberFormatException e){
+        jTextField1.setText("Enter");
+        jTextField2.setText("a number");
+        jTextField3.setText("as a mark");
+        }
+        try{
+            TimeUnit.SECONDS.sleep(5);
+        } catch(InterruptedException a) { 
+           Thread.currentThread().interrupt(); 
+        }
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
-        }
-        
+        }   
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
@@ -287,6 +354,30 @@ String testworth;
         }else{
             jTextField5.setText("lower");
         }
+        testmarkssorted = testmarks;
+        boolean sorted = false;
+        while(!sorted){
+        sorted = true;
+        for(int b = 0; b<testmarks.size(); b++){
+            if(testmarkssorted.get(b)>testmarkssorted.get(b + 1)){
+               holder = testmarkssorted.get(b);
+               testmarkssorted.get(b) = testmarkssorted.get(b+1);
+               testmarkssorted.get(b+1) = holder;
+               sorted = false;        
+            }            
+            }
+        double sortlen = testmarkssorted.size()/2;
+        try{
+            int g = Integer.parseInt(String.valueOf(sortlen));
+            median = (testmarkssorted.get(g) + testmarkssorted.get(g+1))/2;
+            jTextField6.setText(String.valueOf(median));
+        }catch(NumberFormatException w){
+            sortlen += 0.5;
+            median = testmarkssorted.get(Integer.parseInt(String.valueOf(sortlen)));
+            jTextField6.setText(String.valueOf(median));
+        }
+        }
+        
         Exam open = new Exam();
         open.setVisible(true);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
@@ -295,6 +386,24 @@ String testworth;
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+  //public static void bubbleSort(ArrayList<Double>) {
+    //boolean sorted = false;
+    //int temp;
+   // while(!sorted) {
+      //  sorted = true;
+    //    for (int i = 0; i < array.length - 1; i++) {
+  //          if (a[i] > a[i+1]) {
+           //     temp = a[i];
+            //    a[i] = a[i+1];
+          //      a[i+1] = temp;
+        //        sorted = false;
+      //      }
+    //    }
+  //  }
+//}
     /**
      * @param args the command line arguments
      */
@@ -339,6 +448,8 @@ String testworth;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -353,6 +464,7 @@ String testworth;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
