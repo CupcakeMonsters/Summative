@@ -14,7 +14,7 @@ import javax.swing.DefaultListModel;
 public class MarkOrganizerUI extends javax.swing.JFrame {
     DefaultListModel edit = new DefaultListModel();
     public String [][] students;
-    NumberOfUnits close = new NumberOfUnits();
+
     /**
      * Creates new form MarkOrganizerUI
      */
@@ -94,8 +94,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         int position = jList1.locationToIndex(evt.getPoint());
         System.out.println(students[position][1]);
         this.setVisible(false);
-        NumberOfUnits close = new NumberOfUnits();
-        close.setVisible(true);
+       
     }//GEN-LAST:event_jList1MouseClicked
 
     /**

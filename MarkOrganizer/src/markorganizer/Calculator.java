@@ -389,21 +389,7 @@ double median;
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
-  //public static void bubbleSort(ArrayList<Double>) {
-    //boolean sorted = false;
-    //int temp;
-   // while(!sorted) {
-      //  sorted = true;
-    //    for (int i = 0; i < array.length - 1; i++) {
-  //          if (a[i] > a[i+1]) {
-           //     temp = a[i];
-            //    a[i] = a[i+1];
-          //      a[i+1] = temp;
-        //        sorted = false;
-      //      }
-    //    }
-  //  }
-//}
+
     /**
      * @param args the command line arguments
      */
