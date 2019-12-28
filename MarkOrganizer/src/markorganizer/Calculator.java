@@ -12,6 +12,7 @@ package markorganizer;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList; 
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 public class Calculator extends javax.swing.JFrame {
 ArrayList<Double> testmarks = new ArrayList<Double>();
@@ -334,6 +335,7 @@ double median;
         } catch(InterruptedException a) { 
            Thread.currentThread().interrupt(); 
         }
+        //String[] item = fruitList.toArray(new String[fruitList.size()]);  
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
@@ -342,7 +344,7 @@ double median;
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        for(int c = 0; c<testmarks.size(); c++){
+        for(int c = 0; c < testmarks.size(); c++){
             testTotal += testmarks.get(c);
             do{
                 quizTotal += quizmarks.get(c);
@@ -355,17 +357,7 @@ double median;
             jTextField5.setText("lower");
         }
         testmarkssorted = testmarks;
-        boolean sorted = false;
-        while(!sorted){
-        sorted = true;
-        for(int b = 0; b<testmarks.size(); b++){
-            if(testmarkssorted.get(b)>testmarkssorted.get(b + 1)){
-               holder = testmarkssorted.get(b);
-               testmarkssorted.get(b) = testmarkssorted.get(b+1);
-               testmarkssorted.get(b+1) = holder;
-               sorted = false;        
-            }            
-            }
+        Collections.sort(testmarkssorted);
         double sortlen = testmarkssorted.size()/2;
         try{
             int g = Integer.parseInt(String.valueOf(sortlen));
@@ -376,8 +368,6 @@ double median;
             median = testmarkssorted.get(Integer.parseInt(String.valueOf(sortlen)));
             jTextField6.setText(String.valueOf(median));
         }
-        }
-        
         Exam open = new Exam();
         open.setVisible(true);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
