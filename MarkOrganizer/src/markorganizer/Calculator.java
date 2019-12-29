@@ -27,9 +27,8 @@ String quizaverageString;
 double testTotal = 0;
 double quizTotal = 0;
 String testworth;
-double holder;
-double temp;
 double median;
+FileSetup no = new FileSetup();
 /**
      * Creates new form Calculator
      */
@@ -67,6 +66,7 @@ double median;
         jLabel11 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -147,6 +147,13 @@ double median;
 
         jLabel12.setText("/100");
 
+        jButton1.setText("Restart");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -174,8 +181,10 @@ double median;
                         .addComponent(jLabel9))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jToggleButton2)
-                        .addGap(29, 29, 29)
-                        .addComponent(jToggleButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jToggleButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -195,7 +204,7 @@ double median;
                             .addComponent(jLabel6)
                             .addComponent(jLabel10)
                             .addComponent(jLabel12))))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,7 +228,8 @@ double median;
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton1)
-                    .addComponent(jToggleButton2))
+                    .addComponent(jToggleButton2)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -271,7 +281,14 @@ double median;
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
         if(jTextField1.getText().isEmpty()){
-        jTextField1.setText("You must input at least a test mark");
+        jTextField1.setText("You must input");
+        jTextField2.setText("at least");
+        jTextField3.setText("a test mark");
+        try{
+            TimeUnit.SECONDS.sleep(5);
+        } catch(InterruptedException a) { 
+           Thread.currentThread().interrupt(); 
+        }
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
@@ -280,8 +297,8 @@ double median;
         testmarks.add(Double.parseDouble(jTextField1.getText()));
         quizmarks.add(Double.parseDouble(jTextField3.getText()));
         }catch(NumberFormatException e){
-        jTextField1.setText("Enter");
-        jTextField2.setText("a number");
+        jTextField1.setText("Enter a");
+        jTextField2.setText("number");
         jTextField3.setText("as a mark");
         }
         try{
@@ -335,7 +352,6 @@ double median;
         } catch(InterruptedException a) { 
            Thread.currentThread().interrupt(); 
         }
-        //String[] item = fruitList.toArray(new String[fruitList.size()]);  
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
@@ -350,13 +366,16 @@ double median;
                 quizTotal += quizmarks.get(c);
             }while(c<quizmarks.size());
         }
-        jTextField4.setText(String.valueOf(testaverage = testTotal/testmarks.size()));
+        testaverage = testTotal/testmarks.size();
+        jTextField4.setText(String.valueOf(testaverage));
         if(quizaverage>testaverage){
             jTextField5.setText("higher");
         }else{
             jTextField5.setText("lower");
         }
         testmarkssorted = testmarks;
+        //Double[] item = testmarkssorted.toArray(new Double[testmarkssorted.size()]);  
+        //no.bubbleSort(item);
         Collections.sort(testmarkssorted);
         double sortlen = testmarkssorted.size()/2;
         try{
@@ -380,12 +399,19 @@ double median;
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        testmarks.clear();
+        quizmarks.clear();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         Calculator ec = new Calculator();
         DecimalFormat mark = new DecimalFormat("##.##");
+        DecimalFormat perfect = new DecimalFormat("###.##");
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -422,6 +448,7 @@ double median;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
