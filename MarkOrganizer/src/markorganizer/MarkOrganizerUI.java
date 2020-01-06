@@ -186,9 +186,16 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         //being able to manipulate the data in a selected box of a list on screen
         //String item = jList1.getSelectedValue();
         int position = jList1.locationToIndex(evt.getPoint());
+        int inttot = 0, counter = 0, intavg = 0;
+        int examsnotDone = 2;
+        for (int i = 2; i < students[position].length - examsnotDone; i++){
+            inttot += Integer.parseInt(students[position][i]);
+            counter++;
+        }
+        String avg = Integer.toString(inttot/counter);
         jLabel3.setText(students[position][0]);
         jLabel6.setText(students[position][1]);
-        
+        jLabel4.setText(avg);
     }//GEN-LAST:event_jList1MouseClicked
 
     /**

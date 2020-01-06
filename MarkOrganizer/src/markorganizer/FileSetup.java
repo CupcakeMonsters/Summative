@@ -29,7 +29,7 @@ public class FileSetup {
         reader.mark(100000);
         while (reader.readLine() != null) lines++;
         System.out.println(lines+"lines");
-        String[][] students = new String[3][100];//lines -> number of lines in selected data file
+        String[][] students = new String[3][11];//lines -> number of lines in selected data file
         String currStudent = "PlaceHolder";
         int counter = 0;
         reader.reset();
@@ -40,8 +40,11 @@ public class FileSetup {
                 break;
             }
             String[] currArr = currStudent.split(", ");
-            students[counter][0] = currArr[0];
-            students[counter][1] = currArr[1];
+            int studcounter = 0;
+            for (String text: currArr){
+                students[counter][studcounter] = currArr[studcounter];
+                studcounter++;
+            }            
             counter++;
         }
         
