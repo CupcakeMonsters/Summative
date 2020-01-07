@@ -13,29 +13,17 @@ import javax.swing.*;
 import javax.swing.DefaultListModel;
 public class MarkOrganizerUI extends javax.swing.JFrame {
     DefaultListModel edit = new DefaultListModel();
+    DefaultListModel classEdit = new DefaultListModel();
     public String [][] students;
+    public String[] classes;
     
     /**
      * Creates new form MarkOrganizerUI
      */
     public MarkOrganizerUI() {
-        FileSetup.start();
-        try{
-        students = FileSetup.read();
-        /*
-        for(String[] i:students){
-            for(String z: i){
-                System.out.println(z);
-            }
-        }
-        */
-        } catch(IOException e){}
-        
-        for(String[] stud : students){
-            edit.addElement(stud[0]);
-        }
-        
         initComponents();
+        openingWindow.setLocationRelativeTo(null);
+        openingWindow.setVisible(true);
     }
 
     /**
@@ -47,9 +35,20 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        openingWindow = new javax.swing.JFrame();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        classSelectWindow = new javax.swing.JFrame();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new JList(classEdit);
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = jList1 = new JList(edit);
+        jList1 = new JList(edit);
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -60,7 +59,139 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        openingWindow.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        openingWindow.setMinimumSize(new java.awt.Dimension(376, 134));
+        openingWindow.setPreferredSize(new java.awt.Dimension(376, 134));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel7.setFont(new java.awt.Font("Unispace", 0, 14)); // NOI18N
+        jLabel7.setText("Student Mark Organizer");
+
+        jButton3.setText("Create New Class");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Edit Existing Class");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel7)
+                        .addGap(0, 72, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)))
+                .addContainerGap())
+        );
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton3, jButton4});
+
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout openingWindowLayout = new javax.swing.GroupLayout(openingWindow.getContentPane());
+        openingWindow.getContentPane().setLayout(openingWindowLayout);
+        openingWindowLayout.setHorizontalGroup(
+            openingWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(openingWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        openingWindowLayout.setVerticalGroup(
+            openingWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(openingWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        classSelectWindow.setMinimumSize(new java.awt.Dimension(400, 220));
+        classSelectWindow.setPreferredSize(new java.awt.Dimension(400, 220));
+
+        /*
+        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        */
+        jScrollPane2.setViewportView(jList2);
+
+        jButton5.setText("Edit Selected Class");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Delete Selected Class");
+
+        jButton7.setText("Back");
+
+        javax.swing.GroupLayout classSelectWindowLayout = new javax.swing.GroupLayout(classSelectWindow.getContentPane());
+        classSelectWindow.getContentPane().setLayout(classSelectWindowLayout);
+        classSelectWindowLayout.setHorizontalGroup(
+            classSelectWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(classSelectWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(classSelectWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classSelectWindowLayout.createSequentialGroup()
+                        .addComponent(jButton6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addComponent(jButton5)))
+                .addContainerGap())
+        );
+
+        classSelectWindowLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton5, jButton6});
+
+        classSelectWindowLayout.setVerticalGroup(
+            classSelectWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(classSelectWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(classSelectWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6)
+                    .addComponent(jButton7))
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         /*
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
@@ -188,15 +319,54 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         int position = jList1.locationToIndex(evt.getPoint());
         int inttot = 0, counter = 0, intavg = 0;
         int examsnotDone = 2;
+        
         for (int i = 2; i < students[position].length - examsnotDone; i++){
             inttot += Integer.parseInt(students[position][i]);
             counter++;
         }
+        
         String avg = Integer.toString(inttot/counter);
         jLabel3.setText(students[position][0]);
         jLabel6.setText(students[position][1]);
         jLabel4.setText(avg);
     }//GEN-LAST:event_jList1MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        FileSetup.getClasses();
+        try{
+            classes = FileSetup.classList();
+        } catch (IOException e){}
+        
+        for(String cls : classes){
+            classEdit.addElement(cls);
+        }
+        
+        openingWindow.setVisible(false);
+        classSelectWindow.setLocationRelativeTo(null);
+        classSelectWindow.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        this.setLocationRelativeTo(null);
+    }//GEN-LAST:event_formWindowActivated
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String classSel = jList2.getSelectedValue();
+        FileSetup.start(classSel);
+        try{
+        students = FileSetup.read();
+        } catch(IOException e){}
+        
+        for(String[] stud : students){
+            edit.addElement(stud[0]);
+        }
+        classSelectWindow.setVisible(false);
+        this.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,23 +398,34 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MarkOrganizerUI().setVisible(true);
+                new MarkOrganizerUI().setVisible(false);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame classSelectWindow;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    public javax.swing.JList<String> jList1;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JFrame openingWindow;
     // End of variables declaration//GEN-END:variables
 }
