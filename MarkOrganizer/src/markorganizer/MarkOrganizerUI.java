@@ -18,8 +18,8 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     DefaultListModel classEdit = new DefaultListModel();
     DefaultTableModel tableTest = new DefaultTableModel();
     public String [][] students;
+    Calculator qe = new Calculator();
     public String[] classes;
-    
     /**
      * Creates new form MarkOrganizerUI
      */
