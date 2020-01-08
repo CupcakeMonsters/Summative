@@ -46,6 +46,7 @@ public class FileSetup {
     }
     
     public static String[] classList()throws IOException{
+        
         int lines = 0;
         classReader.mark(100000);
         while (classReader.readLine() != null) lines++;
