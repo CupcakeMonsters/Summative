@@ -27,6 +27,7 @@ double testTotal = 0;
 double quizTotal = 0;
 String testworth;
 double median;
+int units;
 FileSetup no = new FileSetup();
 /**
      * Creates new form Calculator
@@ -352,7 +353,8 @@ FileSetup no = new FileSetup();
             try{
                 testmarks.add(Double.parseDouble(Testmarkinput.getText()));
                 quizmarks.add(Double.parseDouble(Quizmark2input.getText()));
-                
+                units++;
+                jTextField1.setText(String.valueOf(units));
             }catch(NumberFormatException e){
                 Error.setVisible(true);
                 Testmarkinput.setText("");
@@ -367,6 +369,8 @@ FileSetup no = new FileSetup();
             try{
                 testmarks.add(Double.parseDouble(Testmarkinput.getText()));
                 quizmarks.add(Double.parseDouble(Quizmark1input.getText()));
+                units++;
+                jTextField1.setText(String.valueOf(units));
             }catch(NumberFormatException e){
                 Error.setVisible(true);
                 Testmarkinput.setText("");
@@ -380,6 +384,8 @@ FileSetup no = new FileSetup();
             Error.setVisible(false);
             try{
                 testmarks.add(Double.parseDouble(Testmarkinput.getText()));
+                units++;
+                jTextField1.setText(String.valueOf(units));
             }catch(NumberFormatException e){
                 Error.setVisible(true);
                 Testmarkinput.setText("");
