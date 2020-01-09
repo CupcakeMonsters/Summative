@@ -322,6 +322,11 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         jButton11.setText("Delete Selected Class");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jButton12.setText("Add New Class");
 
@@ -454,6 +459,26 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         classSelectWindow.setVisible(false);
         this.setVisible(true);
     }//GEN-LAST:event_jList1MouseClicked
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        if(jList1.isSelectionEmpty()){
+            System.out.println("Nothing is selected");
+        } else{
+            int Index = jList1.getSelectedIndex();
+            String clas = jList1.getSelectedValue();
+            
+            try{
+            FileSetup.deleteClass(clas);
+            classes = ListEdits.removeAtIndex(classes, Index);
+            FileSetup.reWriteClass(classes);
+            } catch (IOException e){}
+            
+            classEdit.clear();
+            for(String cls : classes){
+                classEdit.addElement(cls);
+            }
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments

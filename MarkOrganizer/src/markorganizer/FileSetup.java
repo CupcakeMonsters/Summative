@@ -6,6 +6,8 @@ public class FileSetup {
     public static FileReader in;
     public static BufferedReader classReader;
     public static FileReader classIn;
+    public static FileWriter writer;
+    public static BufferedWriter write;
     
     public static void start(String filePath){
         try{
@@ -56,6 +58,30 @@ public class FileSetup {
             classes[i] = classReader.readLine();
         }
         return classes;
+    }
+    
+    public static void deleteClass(String filePath) throws IOException{
+        File delFile = new File(filePath + ".txt");
+        if(delFile.delete()){
+            System.out.println("Deleted Successfully");
+        }
+    }
+    
+    public static void reWriteClass(String[] classes) throws IOException{
+        try{
+            writer = new FileWriter("Classes.txt");
+            write = new BufferedWriter(writer);
+            for (String clas : classes){
+                write.write(clas);
+                write.newLine();
+            }
+            write.close();
+            
+        } catch (IOException e) {
+            System.err.format("IOException: %s%n", e);
+        }
+        
+        
     }
     
     public static String[][] read() throws IOException{
