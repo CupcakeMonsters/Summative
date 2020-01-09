@@ -322,7 +322,10 @@ MarkOrganizerUI write = new MarkOrganizerUI();
         ec.testaverage = ec.testTotal/ec.testmarks.size();
         ec.testaverageString = String.valueOf(ec.testaverage);
         ec.testworth = mark.format((ec.testaverage/100) * 70);
-        
+        int pos1 = jTable1.getSelectedRow();
+        for(int p = 0; p < ec.testmarks.size() + 1; p++){
+            write.students[pos1][p + 2] = ec.testmarks.get(p);
+        }
         }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
