@@ -25,7 +25,6 @@ double median;
 int units;
 FileSetup no = new FileSetup();
 Exam yes = new Exam();
-MarkOrganizerUI write = new MarkOrganizerUI();
 /**
      * Creates new form Calculator
      */
@@ -287,6 +286,7 @@ MarkOrganizerUI write = new MarkOrganizerUI();
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        MarkOrganizerUI write = new MarkOrganizerUI();
         Calculator ec = new Calculator();
         DecimalFormat mark = new DecimalFormat("##.##");
         /* Set the Nimbus look and feel */
@@ -322,9 +322,9 @@ MarkOrganizerUI write = new MarkOrganizerUI();
         ec.testaverage = ec.testTotal/ec.testmarks.size();
         ec.testaverageString = String.valueOf(ec.testaverage);
         ec.testworth = mark.format((ec.testaverage/100) * 70);
-        int pos1 = jTable1.getSelectedRow();
+        int write.pos1 = jTable1.getSelectedRow();
         for(int p = 0; p < ec.testmarks.size() + 1; p++){
-            write.students[pos1][p + 2] = ec.testmarks.get(p);
+            write.students[write.pos1][p + 2] = ec.testmarks.get(p);
         }
         }
 
