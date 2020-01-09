@@ -170,6 +170,7 @@ double finalmark;
         Exam ce = new Exam();
         Calculator re = new Calculator();
         DecimalFormat mark = new DecimalFormat("##.##");
+        MarkOrganizerUI wrote = new MarkOrganizerUI();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -212,6 +213,7 @@ double finalmark;
             ce.finalmark = Double.parseDouble(ce.examworth) + Double.parseDouble(re.testworth);
             ce.jTextField3.setText(String.valueOf(ce.finalmark));
         }
+        int pos1 = 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
