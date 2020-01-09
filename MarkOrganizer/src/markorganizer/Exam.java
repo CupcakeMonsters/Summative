@@ -213,7 +213,10 @@ double finalmark;
             ce.finalmark = Double.parseDouble(ce.examworth) + Double.parseDouble(re.testworth);
             ce.jTextField3.setText(String.valueOf(ce.finalmark));
         }
-        int pos1 = 
+        int pos1 = wrote.jTable1.getSelectedRow();
+        for(int e = 1; e < 3; e++){
+            write.students[pos1][e + 8] = re.testmarks.get(e);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
