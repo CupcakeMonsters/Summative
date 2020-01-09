@@ -226,6 +226,7 @@ MarkOrganizerUI write = new MarkOrganizerUI();
         // TODO add your handling code here:
         testmarks.clear();
         Testmarkinput.setText("");
+        jTextField2.setText("");
     }//GEN-LAST:event_RestartActionPerformed
 
     private void FinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinishActionPerformed
@@ -321,6 +322,7 @@ MarkOrganizerUI write = new MarkOrganizerUI();
         ec.testaverage = ec.testTotal/ec.testmarks.size();
         ec.testaverageString = String.valueOf(ec.testaverage);
         ec.testworth = mark.format((ec.testaverage/100) * 70);
+        
         }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
