@@ -15,6 +15,7 @@ double firstexam = 0;
 double secondexam = 0;
 String examworth;
 double finalmark;
+Calculator qw = new Calculator();
     /**
      * Creates new form Exam
      */
@@ -153,13 +154,17 @@ double finalmark;
         }else if(jTextField1.getText().isEmpty()){
             jLabel7.setVisible(false);
             firstexam = Double.parseDouble(jTextField2.getText());
+            qw.testmarks.add(firstexam);
         }else if(jTextField2.getText().isEmpty()){
             jLabel7.setVisible(false);
             firstexam = Double.parseDouble(jTextField1.getText());
+            qw.testmarks.add(firstexam);
         }else{
             jLabel7.setVisible(false);
             firstexam = Double.parseDouble(jTextField1.getText());
             secondexam = Double.parseDouble(jTextField2.getText());
+            qw.testmarks.add(firstexam);
+            qw.testmarks.add(secondexam);
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -215,7 +220,7 @@ double finalmark;
         }
         int pos1 = wrote.jTable1.getSelectedRow();
         for(int e = 1; e < 3; e++){
-            write.students[pos1][e + 8] = re.testmarks.get(e);
+            wrote.students[pos1][e + 8] = String.valueOf(re.testmarks.get(e + 8));
         }
     }
 
