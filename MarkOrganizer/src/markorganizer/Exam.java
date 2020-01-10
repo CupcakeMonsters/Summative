@@ -15,7 +15,7 @@ double firstexam = 0;
 double secondexam = 0;
 String examworth;
 double finalmark;
-Calculator qw = new Calculator();
+//Calculator qw = new Calculator();
     /**
      * Creates new form Exam
      */
@@ -154,17 +154,17 @@ Calculator qw = new Calculator();
         }else if(jTextField1.getText().isEmpty()){
             jLabel7.setVisible(false);
             firstexam = Double.parseDouble(jTextField2.getText());
-            qw.testmarks.add(firstexam);
+            Calculator.testmarks.add(firstexam);
         }else if(jTextField2.getText().isEmpty()){
             jLabel7.setVisible(false);
             firstexam = Double.parseDouble(jTextField1.getText());
-            qw.testmarks.add(firstexam);
+            Calculator.testmarks.add(firstexam);
         }else{
             jLabel7.setVisible(false);
             firstexam = Double.parseDouble(jTextField1.getText());
             secondexam = Double.parseDouble(jTextField2.getText());
-            qw.testmarks.add(firstexam);
-            qw.testmarks.add(secondexam);
+            Calculator.testmarks.add(firstexam);
+            Calculator.testmarks.add(secondexam);
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 

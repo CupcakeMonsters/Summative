@@ -14,7 +14,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList; 
 import java.util.Collections;
 public class Calculator extends javax.swing.JFrame {
-ArrayList<Double> testmarks = new ArrayList<Double>();
+static ArrayList<Double> testmarks = new ArrayList<Double>();
 ArrayList<Double> testmarkssorted = new ArrayList<Double>();
 double[] testmarksstring = new double[testmarks.size()]; 
 double testaverage;
