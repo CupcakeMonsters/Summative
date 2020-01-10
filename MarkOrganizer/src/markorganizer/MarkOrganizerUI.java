@@ -14,10 +14,11 @@ import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
 public class MarkOrganizerUI extends javax.swing.JFrame {
+    public static int row = -1;
     DefaultListModel edit = new DefaultListModel();
     DefaultListModel classEdit = new DefaultListModel();
     DefaultTableModel tableTest = new DefaultTableModel();
-    public String [][] students;
+    public static String [][] students;
     Calculator qe = new Calculator();
     public String[] classes;
     /**
@@ -424,7 +425,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
       int pos1 = jTable1.getSelectedRow();
-      
+      row = pos1;
       int inttot = 0, counter = 0, intavg = 0;
         int examsnotDone = 2;
         
@@ -440,6 +441,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        row = -1;
         String classSel = jList1.getSelectedValue();
         FileSetup.start(classSel);
         try{

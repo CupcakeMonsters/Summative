@@ -218,9 +218,8 @@ Calculator qw = new Calculator();
             ce.finalmark = Double.parseDouble(ce.examworth) + Double.parseDouble(re.testworth);
             ce.jTextField3.setText(String.valueOf(ce.finalmark));
         }
-        int pos1 = wrote.jTable1.getSelectedRow();
         for(int e = 1; e < 3; e++){
-            wrote.students[pos1][e + 8] = String.valueOf(re.testmarks.get(e + 8));
+            wrote.students[MarkOrganizerUI.row][e + 8] = String.valueOf(re.testmarks.get(e + 8));
         }
     }
 

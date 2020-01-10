@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 public class Calculator extends javax.swing.JFrame {
 ArrayList<Double> testmarks = new ArrayList<Double>();
-ArrayList<String> testmarksstring = new ArrayList<String>();
+ArrayList<Double> testmarkssorted = new ArrayList<Double>();
 double[] testmarksstring = new double[testmarks.size()]; 
 double testaverage;
 String testaverageString;
@@ -31,6 +31,9 @@ Exam yes = new Exam();
     public Calculator() {
         initComponents();
         Error.setVisible(false);
+        if(MarkOrganizerUI.row == -1){
+            this.setVisible(false);
+        }
     }
 
     /**
@@ -62,7 +65,7 @@ Exam yes = new Exam();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Enter marks here", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Enter test marks ONLY here", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 18))); // NOI18N
 
         Testmark.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Testmark.setText("Test mark:");
@@ -252,7 +255,9 @@ Exam yes = new Exam();
             median = testmarkssorted.get(middle);
             Mediandisplay.setText(String.valueOf(med.format(median)));
         }
-        yes.setVisible(true);
+        if(testmarks.size() == 7){
+            yes.setVisible(true);
+        }
     }//GEN-LAST:event_FinishActionPerformed
 
     private void ContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueActionPerformed
@@ -326,10 +331,12 @@ Exam yes = new Exam();
             ec.testmarksstring[q] = ec.testmarks.get(q);
             System.out.println(ec.testmarksstring);
         }
-        int pos1 = write.jTable1.getSelectedRow();
         for(int p = 0; p < ec.testmarks.size() + 1; p++){
-            write.students[pos1][p + 2] = String.valueOf(ec.testmarksstring[p]);
+            if(MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2] == null || MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2].equals(" ")){
+                MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2] = String.valueOf(ec.testmarksstring[p]);
+            }
         }
+        System.out.println(MarkOrganizerUI.students);
         }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
