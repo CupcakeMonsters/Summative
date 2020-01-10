@@ -16,7 +16,7 @@ import java.util.Collections;
 public class Calculator extends javax.swing.JFrame {
 ArrayList<Double> testmarks = new ArrayList<Double>();
 ArrayList<String> testmarksstring = new ArrayList<String>();
-ArrayList<Double> testmarkssorted = new ArrayList<Double>();
+double[] testmarksstring = new double[testmarks.size()]; 
 double testaverage;
 String testaverageString;
 double testTotal = 0;
@@ -322,9 +322,13 @@ Exam yes = new Exam();
         ec.testaverage = ec.testTotal/ec.testmarks.size();
         ec.testaverageString = String.valueOf(ec.testaverage);
         ec.testworth = mark.format((ec.testaverage/100) * 70);
-        int write.pos1 = jTable1.getSelectedRow();
+        for(int q = 0; q < ec.testmarks.size(); ++q){
+            ec.testmarksstring[q] = ec.testmarks.get(q);
+            System.out.println(ec.testmarksstring);
+        }
+        int pos1 = write.jTable1.getSelectedRow();
         for(int p = 0; p < ec.testmarks.size() + 1; p++){
-            write.students[write.pos1][p + 2] = ec.testmarks.get(p);
+            write.students[pos1][p + 2] = String.valueOf(ec.testmarksstring[p]);
         }
         }
 
