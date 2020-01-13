@@ -36,7 +36,6 @@ int req;
         if(MarkOrganizerUI.row == -1){
             this.setVisible(false);
         }
-        jLabel2.setVisible(false);
         jTextField1.setText(String.valueOf(req));
         System.out.println("MarkOrganizerUI.units : " + MarkOrganizerUI.units);
         
@@ -68,7 +67,6 @@ int req;
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -138,55 +136,47 @@ int req;
             }
         });
 
-        jLabel2.setText("You have not enough tests to calculate a median");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Testmedian)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Mediandisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabel12))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Continue)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Finish)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Restart))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Testaverage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Testaveragedisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Continue)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Finish)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Restart))
+                                .addComponent(jLabel1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Testaverage)
+                                .addComponent(Testmark)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Testmarkinput, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Testaveragedisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel10))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel1))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(Testmark)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(Testmarkinput, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Error)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Error))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,8 +207,7 @@ int req;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Testmedian)
                     .addComponent(Mediandisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel2)))
+                    .addComponent(jLabel12)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -237,76 +226,17 @@ int req;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TestmarkinputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TestmarkinputActionPerformed
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TestmarkinputActionPerformed
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void MediandisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MediandisplayActionPerformed
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MediandisplayActionPerformed
-
-    private void RestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestartActionPerformed
-        // TODO add your handling code here:
-        MarkOrganizerUI.testmarks.clear();
-        Testmarkinput.setText("");
-        jTextField2.setText("");
-    }//GEN-LAST:event_RestartActionPerformed
-
-    private void FinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinishActionPerformed
-        // TODO add your handling code here:
-        if(!Testmarkinput.getText().isEmpty() && !jTextField2.getText().isEmpty()){
-            Error.setVisible(false);
-            try{
-                double a = Double.parseDouble((Testmarkinput.getText()));
-                double b = Double.parseDouble(jTextField2.getText());
-                MarkOrganizerUI.testmarks.add((a/b)*100);
-                MarkOrganizerUI.units++;
-                jTextField1.setText(String.valueOf(MarkOrganizerUI.units));
-            }catch(NumberFormatException e){
-                Error.setVisible(true);
-                Testmarkinput.setText("");
-                jTextField2.setText("");
-            }
-            Testmarkinput.setText("");
-            jTextField2.setText("");
-            }
-        DecimalFormat med = new DecimalFormat("##.##");
-        testTotal = 0;
-        for(double c: MarkOrganizerUI.testmarks){
-            testTotal += c;
-        }
-        testaverage = testTotal/MarkOrganizerUI.testmarks.size();
-        Testaveragedisplay.setText(String.valueOf(med.format(testaverage)));
-        testmarkssorted = MarkOrganizerUI.testmarks;
-        Collections.sort(testmarkssorted);
-        if(MarkOrganizerUI.units == 7){
-            int medindex = 3;
-            median = testmarkssorted.get(medindex);
-            Mediandisplay.setText(String.valueOf(med.format(median)));
-            yes.setVisible(true);
-        }else{
-            jLabel2.setVisible(true);
-        }
-        /*for(int p = 0; p < MarkOrganizerUI.testmarks.size(); p++){
-            if(MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2] == null && MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2].equals("")){
-                MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2] = String.valueOf(MarkOrganizerUI.testmarks.get(p));
-            }
-        }*/
-        for(int y = 0; y < 9; y++){
-            System.out.println(MarkOrganizerUI.students[MarkOrganizerUI.row][y]);
-        }
-        
-        /*else{
-            sortlen = (sortlen + 1)/2;
-            int middle = Integer.parseInt(String.valueOf(sortlen));
-            median = testmarkssorted.get(middle);
-            Mediandisplay.setText(String.valueOf(med.format(median)));
-        }*/        
-    }//GEN-LAST:event_FinishActionPerformed
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void ContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueActionPerformed
         // TODO add your handling code here:
-         if(Testmarkinput.getText().isEmpty() || jTextField2.getText().isEmpty()){
+        if(Testmarkinput.getText().isEmpty() || jTextField2.getText().isEmpty()){
             Error.setVisible(true);
             Testmarkinput.setText("");
             jTextField2.setText("");
@@ -334,13 +264,81 @@ int req;
         }
     }//GEN-LAST:event_ContinueActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void FinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinishActionPerformed
+        if(!Testmarkinput.getText().isEmpty() && !jTextField2.getText().isEmpty()){
+            Error.setVisible(false);
+            try{
+                double a = Double.parseDouble((Testmarkinput.getText()));
+                double b = Double.parseDouble(jTextField2.getText());
+                if(a>b){
+                    Error.setVisible(true);
+                }else{
+                    MarkOrganizerUI.testmarks.add((a/b)*100);
+                    MarkOrganizerUI.units++;
+                    jTextField1.setText(String.valueOf(MarkOrganizerUI.units));
+                    int p = MarkOrganizerUI.testmarks.size() - 1;
+                    MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2] = String.valueOf(MarkOrganizerUI.testmarks.get(p));
+                }
+            }catch(NumberFormatException e){
+                Error.setVisible(true);
+                Testmarkinput.setText("");
+                jTextField2.setText("");
+            }
+            Testmarkinput.setText("");
+            jTextField2.setText("");
+        }
+        DecimalFormat med = new DecimalFormat("##.##");
+        testTotal = 0;
+        for(double c: MarkOrganizerUI.testmarks){
+            testTotal += c;
+        }
+        testaverage = testTotal/MarkOrganizerUI.testmarks.size();
+        Testaveragedisplay.setText(String.valueOf(med.format(testaverage)));
+        testmarkssorted = MarkOrganizerUI.testmarks;
+        Collections.sort(testmarkssorted);
+        if(MarkOrganizerUI.units % 2 != 0){
+            int medindex = MarkOrganizerUI.testmarks.size()/2;
+            median = testmarkssorted.get(medindex);
+            Mediandisplay.setText(String.valueOf(med.format(median)));
+            yes.setVisible(true);
+        }else{
+            int medindex = MarkOrganizerUI.testmarks.size()/2;
+            int medindexx = medindex - 1;
+            median = (testmarkssorted.get(medindex) + testmarkssorted.get(medindexx))/2;
+            Mediandisplay.setText(String.valueOf(med.format(median)));
+            yes.setVisible(true);
+        }
+        /*for(int p = 0; p < MarkOrganizerUI.testmarks.size(); p++){
+            if(MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2] == null && MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2].equals("")){
+                MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2] = String.valueOf(MarkOrganizerUI.testmarks.get(p));
+            }
+        }*/
+        for(int y = 0; y < 9; y++){
+            System.out.println("The array is:" + MarkOrganizerUI.students[MarkOrganizerUI.row][y]);
+        }
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        /*else{
+            sortlen = (sortlen + 1)/2;
+            int middle = Integer.parseInt(String.valueOf(sortlen));
+            median = testmarkssorted.get(middle);
+            Mediandisplay.setText(String.valueOf(med.format(median)));
+        }*/
+    }//GEN-LAST:event_FinishActionPerformed
+
+    private void RestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestartActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        MarkOrganizerUI.testmarks.clear();
+        Testmarkinput.setText("");
+        jTextField2.setText("");
+    }//GEN-LAST:event_RestartActionPerformed
+
+    private void MediandisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MediandisplayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MediandisplayActionPerformed
+
+    private void TestmarkinputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TestmarkinputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TestmarkinputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -398,7 +396,6 @@ int req;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;

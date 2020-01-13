@@ -517,10 +517,10 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             jLabel8.setVisible(false);
             students[row][2] = "90"; //dummy values, erase these later
             students[row][3] = "60";
-            students[row][4] = "";
-            students[row][5] = "";
-            students[row][6] = "";
-            students[row][7] = "";
+            students[row][4] = " ";
+            students[row][5] = " ";
+            students[row][6] = " ";
+            students[row][7] = " ";
             testmarks.add(90.0);
             testmarks.add(60.0);
             units = 2;
