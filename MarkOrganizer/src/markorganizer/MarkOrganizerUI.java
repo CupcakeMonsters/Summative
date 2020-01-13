@@ -158,6 +158,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        classSelectWindow.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         classSelectWindow.setMinimumSize(new java.awt.Dimension(400, 220));
 
         /*
@@ -548,15 +549,16 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
       int inttot = 0, counter = 0, intavg = 0;
         int examsnotDone = 2;
         
+        /*
         for (int i = 2; i < students[pos1].length - examsnotDone; i++){
             inttot += Integer.parseInt(students[pos1][i]);
             counter++;
         }
         
-        String avg = Integer.toString(inttot/counter);
+        String avg = Integer.toString(inttot/counter);*/
         jLabel3.setText(students[pos1][0]);
         jLabel6.setText(students[pos1][1]);
-        jLabel4.setText(avg);
+        //jLabel4.setText(avg);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
@@ -653,6 +655,27 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             tempStudents[i][0] = String.valueOf(classAdderT.getValueAt(i, 0));
             tempStudents[i][1] = String.valueOf(classAdderT.getValueAt(i, 1));
         }
+        try{
+        FileSetup.saveData(newClassName, tempStudents);
+        
+        String[] tempClasses = new String[classes.length+1];
+        for (int i = 0; i < classes.length; i++){
+            tempClasses[i] = classes[i];
+        }
+        tempClasses[tempClasses.length-1] = newClassName;
+        classes=tempClasses;
+        FileSetup.reWriteClass(classes);
+        
+        classEdit.clear();
+        
+        for(String cls : classes){
+            classEdit.addElement(cls);
+        }
+        
+        addClass.setVisible(false);
+        this.setVisible(true);
+        }
+        catch(IOException e){}
     }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
