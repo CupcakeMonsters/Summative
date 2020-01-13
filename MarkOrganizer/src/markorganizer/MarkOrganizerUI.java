@@ -212,8 +212,9 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         );
 
         addClass.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addClass.setMaximumSize(new java.awt.Dimension(427, 288));
-        addClass.setMinimumSize(new java.awt.Dimension(427, 288));
+        addClass.setMaximumSize(new java.awt.Dimension(438, 317));
+        addClass.setMinimumSize(new java.awt.Dimension(438, 317));
+        addClass.setPreferredSize(new java.awt.Dimension(438, 317));
         addClass.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 addClassWindowActivated(evt);
@@ -603,7 +604,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void addClassWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_addClassWindowActivated
-        System.out.println("GAINED FOCUS");
+            
     }//GEN-LAST:event_addClassWindowActivated
 
     private void jTable2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable2PropertyChange
@@ -624,16 +625,16 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         String newClassName = jTextField1.getText();
-        tempStudents = new String[classAdderT.getRowCount()][11];
+        tempStudents = new String[classAdderT.getRowCount()-1][11];
         for (String[] fill : tempStudents){
             for (int i = 0; i < 11; i++){
-                fill[i] = "0";
+                fill[i] = "";
             }
         }
         
-        for (int i = 0; i < classAdderT.getRowCount(); i++){
-            tempStudents[classAdderT.getRowCount()][0] = String.valueOf(classAdderT.getValueAt(i, 0));
-            tempStudents[classAdderT.getRowCount()][1] = String.valueOf(classAdderT.getValueAt(i, 1));
+        for (int i = 0; i < (classAdderT.getRowCount()-1); i++){
+            tempStudents[i][0] = String.valueOf(classAdderT.getValueAt(i, 0));
+            tempStudents[i][1] = String.valueOf(classAdderT.getValueAt(i, 1));
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
