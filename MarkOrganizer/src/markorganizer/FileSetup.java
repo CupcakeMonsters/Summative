@@ -110,4 +110,24 @@ public class FileSetup {
         return students;
     }
     
+    public static void saveData(String filePath, String[][]students) throws IOException{
+        if("placeholder".equals(filePath)){
+            //haha
+        }
+        else{
+            try{
+                writer = new FileWriter(filePath + ".txt");
+                write = new BufferedWriter(writer);
+                for (String[] clas : students){
+                    String temp = String.join(", ", clas);
+                    write.write(temp);
+                    write.newLine();
+                }
+                write.close();
+
+            } catch (IOException e) {
+                System.err.format("IOException: %s%n", e);
+            }
+        }
+    }
 }
