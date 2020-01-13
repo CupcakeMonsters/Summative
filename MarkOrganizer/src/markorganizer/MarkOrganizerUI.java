@@ -14,11 +14,14 @@ import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
 public class MarkOrganizerUI extends javax.swing.JFrame {
+    public static int row = -1;
     DefaultListModel edit = new DefaultListModel();
     DefaultListModel classEdit = new DefaultListModel();
     DefaultTableModel tableTest = new DefaultTableModel();
-    public String [][] students;
     public String classSel = "placeholder";
+    DefaultTableModel classAdderT = new DefaultTableModel();
+    public static String [][] students;
+    public static String[][] tempStudents;
     Calculator qe = new Calculator();
     public String[] classes;
     /**
@@ -26,6 +29,10 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
      */
     public MarkOrganizerUI() {
         initComponents();
+        classAdderT.addColumn("Name");
+        classAdderT.addColumn("Student Number");
+        String[] temp = {"",""};
+        classAdderT.addRow(temp);
         tableTest.addColumn("Name");
         tableTest.addColumn("Student Number");
         openingWindow.setLocationRelativeTo(null);
@@ -52,6 +59,14 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        addClass = new javax.swing.JFrame();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable2 = new JTable(classAdderT);
+        jButton8 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -197,6 +212,100 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        addClass.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addClass.setMaximumSize(new java.awt.Dimension(438, 317));
+        addClass.setMinimumSize(new java.awt.Dimension(438, 317));
+        addClass.setPreferredSize(new java.awt.Dimension(438, 317));
+        addClass.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                addClassWindowActivated(evt);
+            }
+        });
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Class Adder"));
+
+        jLabel8.setText("Class Name:");
+
+        jLabel9.setText("Student List:");
+
+        /*
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        */
+        jTable2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTable2PropertyChange(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jTable2);
+
+        jButton8.setText("Confirm Class");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel9)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton8)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton8))
+        );
+
+        javax.swing.GroupLayout addClassLayout = new javax.swing.GroupLayout(addClass.getContentPane());
+        addClass.getContentPane().setLayout(addClassLayout);
+        addClassLayout.setHorizontalGroup(
+            addClassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addClassLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        addClassLayout.setVerticalGroup(
+            addClassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addClassLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(410, 359));
@@ -335,6 +444,11 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         });
 
         jButton12.setText("Add New Class");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -430,7 +544,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
       int pos1 = jTable1.getSelectedRow();
-      
+      row = pos1;
       int inttot = 0, counter = 0, intavg = 0;
         int examsnotDone = 2;
         
@@ -449,6 +563,8 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         try{
         FileSetup.saveData(classSel, students);
         classSel = jList1.getSelectedValue();
+        row = -1;
+        String classSel = jList1.getSelectedValue();
         FileSetup.start(classSel);
         students = FileSetup.read();
         } catch(IOException e){}
@@ -486,7 +602,10 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             }
             //hey
         }
+        
+       
     }//GEN-LAST:event_jButton11ActionPerformed
+
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
@@ -494,6 +613,47 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         }catch(IOException e){}
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        this.setVisible(false);
+        addClass.setLocationRelativeTo(null);
+        addClass.setVisible(true);
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void addClassWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_addClassWindowActivated
+            
+    }//GEN-LAST:event_addClassWindowActivated
+
+    private void jTable2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable2PropertyChange
+        if (classAdderT.getRowCount() > 0){
+            if(classAdderT.getValueAt(classAdderT.getRowCount()-1, 0).equals("")){
+               //Do nothing 
+           } else {
+               if(classAdderT.getValueAt(classAdderT.getRowCount()-1, 1).equals("")){
+                   //Do nothing
+               } 
+               else {
+                   String[] temp = {"",""};
+                   classAdderT.addRow(temp);
+               }
+           }
+        }
+    }//GEN-LAST:event_jTable2PropertyChange
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        String newClassName = jTextField1.getText();
+        tempStudents = new String[classAdderT.getRowCount()-1][11];
+        for (String[] fill : tempStudents){
+            for (int i = 0; i < 11; i++){
+                fill[i] = "";
+            }
+        }
+        
+        for (int i = 0; i < (classAdderT.getRowCount()-1); i++){
+            tempStudents[i][0] = String.valueOf(classAdderT.getValueAt(i, 0));
+            tempStudents[i][1] = String.valueOf(classAdderT.getValueAt(i, 1));
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -531,6 +691,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame addClass;
     private javax.swing.JFrame classSelectWindow;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
@@ -541,6 +702,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -548,15 +710,21 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JFrame openingWindow;
     // End of variables declaration//GEN-END:variables
 }

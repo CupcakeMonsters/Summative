@@ -15,6 +15,7 @@ double firstexam = 0;
 double secondexam = 0;
 String examworth;
 double finalmark;
+//Calculator qw = new Calculator();
     /**
      * Creates new form Exam
      */
@@ -153,13 +154,17 @@ double finalmark;
         }else if(jTextField1.getText().isEmpty()){
             jLabel7.setVisible(false);
             firstexam = Double.parseDouble(jTextField2.getText());
+            Calculator.testmarks.add(firstexam);
         }else if(jTextField2.getText().isEmpty()){
             jLabel7.setVisible(false);
             firstexam = Double.parseDouble(jTextField1.getText());
+            Calculator.testmarks.add(firstexam);
         }else{
             jLabel7.setVisible(false);
             firstexam = Double.parseDouble(jTextField1.getText());
             secondexam = Double.parseDouble(jTextField2.getText());
+            Calculator.testmarks.add(firstexam);
+            Calculator.testmarks.add(secondexam);
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -170,6 +175,7 @@ double finalmark;
         Exam ce = new Exam();
         Calculator re = new Calculator();
         DecimalFormat mark = new DecimalFormat("##.##");
+        MarkOrganizerUI wrote = new MarkOrganizerUI();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -211,6 +217,9 @@ double finalmark;
             ce.examworth = mark.format((ce.secondexam/100) * 30);
             ce.finalmark = Double.parseDouble(ce.examworth) + Double.parseDouble(re.testworth);
             ce.jTextField3.setText(String.valueOf(ce.finalmark));
+        }
+        for(int e = 1; e < 3; e++){
+            wrote.students[MarkOrganizerUI.row][e + 8] = String.valueOf(re.testmarks.get(e + 8));
         }
     }
 
