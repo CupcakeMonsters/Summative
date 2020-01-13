@@ -247,6 +247,11 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jTable2);
 
         jButton8.setText("Confirm Class");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -603,10 +608,10 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
 
     private void jTable2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable2PropertyChange
         if (classAdderT.getRowCount() > 0){
-            if(classAdderT.getValueAt(classAdderT.getRowCount(), 0).equals("")){
+            if(classAdderT.getValueAt(classAdderT.getRowCount()-1, 0).equals("")){
                //Do nothing 
            } else {
-               if(classAdderT.getValueAt(classAdderT.getRowCount(), 1).equals("")){
+               if(classAdderT.getValueAt(classAdderT.getRowCount()-1, 1).equals("")){
                    //Do nothing
                } 
                else {
@@ -616,6 +621,21 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
            }
         }
     }//GEN-LAST:event_jTable2PropertyChange
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        String newClassName = jTextField1.getText();
+        tempStudents = new String[classAdderT.getRowCount()][11];
+        for (String[] fill : tempStudents){
+            for (int i = 0; i < 11; i++){
+                fill[i] = "0";
+            }
+        }
+        
+        for (int i = 0; i < classAdderT.getRowCount(); i++){
+            tempStudents[classAdderT.getRowCount()][0] = String.valueOf(classAdderT.getValueAt(i, 0));
+            tempStudents[classAdderT.getRowCount()][1] = String.valueOf(classAdderT.getValueAt(i, 1));
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
