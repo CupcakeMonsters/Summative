@@ -151,9 +151,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="Testmarkinput">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TestmarkinputActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="Testaverage">
           <Properties>
@@ -184,9 +181,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="Mediandisplay">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MediandisplayActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
           <Properties>
@@ -233,9 +227,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField2">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

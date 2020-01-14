@@ -75,12 +75,6 @@ int req;
         Testmark.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Testmark.setText("Test mark:");
 
-        Testmarkinput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TestmarkinputActionPerformed(evt);
-            }
-        });
-
         Testaverage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Testaverage.setText("Test average is: ");
 
@@ -90,12 +84,6 @@ int req;
 
         Testmedian.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Testmedian.setText("Test median is:");
-
-        Mediandisplay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MediandisplayActionPerformed(evt);
-            }
-        });
 
         jLabel12.setText("/100");
 
@@ -129,12 +117,6 @@ int req;
         });
 
         jLabel1.setText("unit tests entered");
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -225,14 +207,6 @@ int req;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void ContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueActionPerformed
         // TODO add your handling code here:
@@ -331,14 +305,6 @@ int req;
         Testmarkinput.setText("");
         jTextField2.setText("");
     }//GEN-LAST:event_RestartActionPerformed
-
-    private void MediandisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MediandisplayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MediandisplayActionPerformed
-
-    private void TestmarkinputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TestmarkinputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TestmarkinputActionPerformed
 
     /**
      * @param args the command line arguments

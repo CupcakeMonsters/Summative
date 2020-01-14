@@ -152,7 +152,7 @@ double finalmark;
             try{
                 firstexam = Double.parseDouble(jTextField2.getText());
                 MarkOrganizerUI.testmarks.add(firstexam);
-                MarkOrganizerUI.students[MarkOrganizerUI.row][8] = String.valueOf(firstexam);
+                MarkOrganizerUI.students[MarkOrganizerUI.row][9] = String.valueOf(firstexam);
             }catch(NumberFormatException q){
                 jLabel7.setVisible(true);
             }            
@@ -161,7 +161,7 @@ double finalmark;
             try{
                 firstexam = Double.parseDouble(jTextField1.getText());
                 MarkOrganizerUI.testmarks.add(firstexam);
-                MarkOrganizerUI.students[MarkOrganizerUI.row][8] = String.valueOf(firstexam);
+                MarkOrganizerUI.students[MarkOrganizerUI.row][9] = String.valueOf(firstexam);
             }catch(NumberFormatException q){
                 jLabel7.setVisible(true);
             }            
@@ -172,8 +172,8 @@ double finalmark;
                 secondexam = Double.parseDouble(jTextField2.getText());
                 MarkOrganizerUI.testmarks.add(firstexam);
                 MarkOrganizerUI.testmarks.add(secondexam);
-                MarkOrganizerUI.students[MarkOrganizerUI.row][8] = String.valueOf(firstexam);
-                MarkOrganizerUI.students[MarkOrganizerUI.row][9] = String.valueOf(secondexam);
+                MarkOrganizerUI.students[MarkOrganizerUI.row][9] = String.valueOf(firstexam);
+                MarkOrganizerUI.students[MarkOrganizerUI.row][10] = String.valueOf(secondexam);
             }catch(NumberFormatException q){
                 jLabel7.setVisible(true);
             }    
