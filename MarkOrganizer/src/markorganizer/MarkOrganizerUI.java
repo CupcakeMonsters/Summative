@@ -97,11 +97,6 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jLabel7.setText("Student Mark Organizer");
 
         jButton3.setText("Create New Class");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
 
         jButton4.setText("Edit Existing Class");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -214,9 +209,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         );
 
         addClass.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addClass.setMaximumSize(new java.awt.Dimension(438, 317));
         addClass.setMinimumSize(new java.awt.Dimension(438, 317));
-        addClass.setPreferredSize(new java.awt.Dimension(438, 317));
         addClass.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 addClassWindowActivated(evt);
@@ -503,10 +496,6 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         FileSetup.getClasses();
         try{
@@ -643,6 +632,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable2PropertyChange
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        //Code to add new classes based on input into a table
         String newClassName = jTextField1.getText();
         tempStudents = new String[classAdderT.getRowCount()-1][11];
         for (String[] fill : tempStudents){
@@ -655,6 +645,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             tempStudents[i][0] = String.valueOf(classAdderT.getValueAt(i, 0));
             tempStudents[i][1] = String.valueOf(classAdderT.getValueAt(i, 1));
         }
+        //Saving the new class in a file
         try{
         FileSetup.saveData(newClassName, tempStudents);
         

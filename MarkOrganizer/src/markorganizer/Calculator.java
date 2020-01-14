@@ -70,12 +70,6 @@ Exam yes = new Exam();
         Testmark.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Testmark.setText("Test mark:");
 
-        Testmarkinput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TestmarkinputActionPerformed(evt);
-            }
-        });
-
         Testaverage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Testaverage.setText("Test average is: ");
 
@@ -85,12 +79,6 @@ Exam yes = new Exam();
 
         Testmedian.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Testmedian.setText("Test median is:");
-
-        Mediandisplay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MediandisplayActionPerformed(evt);
-            }
-        });
 
         jLabel12.setText("/100");
 
@@ -118,12 +106,6 @@ Exam yes = new Exam();
         });
 
         jLabel1.setText("unit tests entered");
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -216,14 +198,6 @@ Exam yes = new Exam();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TestmarkinputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TestmarkinputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TestmarkinputActionPerformed
-
-    private void MediandisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MediandisplayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MediandisplayActionPerformed
-
     private void RestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestartActionPerformed
         // TODO add your handling code here:
         testmarks.clear();
@@ -282,10 +256,6 @@ Exam yes = new Exam();
             jTextField2.setText("");
         }
     }//GEN-LAST:event_ContinueActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
