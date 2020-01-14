@@ -13,6 +13,7 @@ package markorganizer;
 import java.text.DecimalFormat;
 import java.util.ArrayList; 
 import java.util.Collections;
+import java.io.IOException;
 
 public class Calculator extends javax.swing.JFrame {
 ArrayList<Double> testmarkssorted = new ArrayList<Double>();
@@ -60,13 +61,12 @@ int req;
         Testmedian = new javax.swing.JLabel();
         Mediandisplay = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        Restart = new javax.swing.JButton();
         Error = new javax.swing.JLabel();
-        Finish = new javax.swing.JButton();
         Continue = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,23 +87,9 @@ int req;
 
         jLabel12.setText("/100");
 
-        Restart.setText("Restart");
-        Restart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RestartActionPerformed(evt);
-            }
-        });
-
         Error.setText("Invalid input");
 
-        Finish.setText("Finish and display average");
-        Finish.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FinishActionPerformed(evt);
-            }
-        });
-
-        Continue.setText("Continue?");
+        Continue.setText("Continue");
         Continue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ContinueActionPerformed(evt);
@@ -111,6 +97,10 @@ int req;
         });
 
         jLabel1.setText("unit tests entered");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel2.setText("-");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,12 +115,6 @@ int req;
                         .addComponent(Mediandisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel12))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Continue)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Finish)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Restart))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Testaverage)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -150,9 +134,13 @@ int req;
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Continue))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Error))))
+                        .addComponent(Error)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,15 +153,17 @@ int req;
                         .addComponent(Error)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Testmarkinput, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Continue)
-                    .addComponent(Finish)
-                    .addComponent(Restart))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Continue))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel2)))
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Testaverage)
@@ -201,38 +191,12 @@ int req;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void displayStudentName(String name){
+        jLabel2.setText(name);
+    }
+    
     private void ContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueActionPerformed
-        // TODO add your handling code here:
-        if(Testmarkinput.getText().isEmpty() || jTextField2.getText().isEmpty()){
-            Error.setVisible(true);
-            Testmarkinput.setText("");
-            jTextField2.setText("");
-        }else{
-            Error.setVisible(false);
-            try{
-                double a = Double.parseDouble((Testmarkinput.getText()));
-                double b = Double.parseDouble(jTextField2.getText());
-                if(a <= b){
-                    MarkOrganizerUI.testmarks.add((a/b)*100);
-                    MarkOrganizerUI.units++;
-                    jTextField1.setText(String.valueOf(MarkOrganizerUI.units));
-                    int p = MarkOrganizerUI.testmarks.size() - 1;
-                    MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2] = String.valueOf(MarkOrganizerUI.testmarks.get(p));
-                }else{
-                    Error.setVisible(true);
-                }
-            }catch(NumberFormatException e){
-                Error.setVisible(true);
-                Testmarkinput.setText("");
-                jTextField2.setText("");
-            }
-            Testmarkinput.setText("");
-            jTextField2.setText("");
-        }
-    }//GEN-LAST:event_ContinueActionPerformed
-
-    private void FinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinishActionPerformed
         if(!Testmarkinput.getText().isEmpty() && !jTextField2.getText().isEmpty()){
             Error.setVisible(false);
             try{
@@ -241,17 +205,24 @@ int req;
                 if(a>b){
                     Error.setVisible(true);
                 }else{
-                    MarkOrganizerUI.testmarks.add((a/b)*100);
+                    for(int checks = 0; checks<9; checks++){
+                        if(MarkOrganizerUI.students[MarkOrganizerUI.row][checks+2].equals(" ")){}
+                        else{
+                            MarkOrganizerUI.testmarks.add(0.0);
+                            MarkOrganizerUI.testmarks.set(checks, Double.parseDouble(MarkOrganizerUI.students[MarkOrganizerUI.row][checks+2]));
+                        }
+                    }    
+                    MarkOrganizerUI.testmarks.set(MarkOrganizerUI.testClicked -1, (a/b)*100);
                     MarkOrganizerUI.units++;
                     jTextField1.setText(String.valueOf(MarkOrganizerUI.units));
-                    int p = MarkOrganizerUI.testmarks.size() - 1;
-                    MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2] = String.valueOf(MarkOrganizerUI.testmarks.get(p));
+                    MarkOrganizerUI.students[MarkOrganizerUI.row][MarkOrganizerUI.testClicked + 1] = Double.toString((a/b)*100);
+                    FileSetup.saveData(" ", MarkOrganizerUI.students);
                 }
             }catch(NumberFormatException e){
                 Error.setVisible(true);
                 Testmarkinput.setText("");
                 jTextField2.setText("");
-            }
+            }catch(IOException e){}
             Testmarkinput.setText("");
             jTextField2.setText("");
         }
@@ -268,14 +239,13 @@ int req;
             int medindex = MarkOrganizerUI.testmarks.size()/2;
             median = testmarkssorted.get(medindex);
             Mediandisplay.setText(String.valueOf(med.format(median)));
-            yes.setVisible(true);
         }else{
             int medindex = MarkOrganizerUI.testmarks.size()/2;
             int medindexx = medindex - 1;
             median = (testmarkssorted.get(medindex) + testmarkssorted.get(medindexx))/2;
             Mediandisplay.setText(String.valueOf(med.format(median)));
-            yes.setVisible(true);
         }
+        
         /*for(int p = 0; p < MarkOrganizerUI.testmarks.size(); p++){
             if(MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2] == null && MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2].equals("")){
                 MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2] = String.valueOf(MarkOrganizerUI.testmarks.get(p));
@@ -291,14 +261,7 @@ int req;
             median = testmarkssorted.get(middle);
             Mediandisplay.setText(String.valueOf(med.format(median)));
         }*/
-    }//GEN-LAST:event_FinishActionPerformed
-
-    private void RestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestartActionPerformed
-        // TODO add your handling code here:
-        MarkOrganizerUI.testmarks.clear();
-        Testmarkinput.setText("");
-        jTextField2.setText("");
-    }//GEN-LAST:event_RestartActionPerformed
+    }//GEN-LAST:event_ContinueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,9 +308,7 @@ int req;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Continue;
     private javax.swing.JLabel Error;
-    private javax.swing.JButton Finish;
     private javax.swing.JTextField Mediandisplay;
-    private javax.swing.JButton Restart;
     private javax.swing.JLabel Testaverage;
     private javax.swing.JTextField Testaveragedisplay;
     private javax.swing.JLabel Testmark;
@@ -356,6 +317,7 @@ int req;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
