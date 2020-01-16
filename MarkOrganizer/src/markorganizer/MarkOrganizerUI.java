@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
+import java.lang.*;
 
 public class MarkOrganizerUI extends javax.swing.JFrame {
     public static ArrayList<Double> testmarks = new ArrayList<Double>();
@@ -21,7 +22,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     DefaultListModel edit = new DefaultListModel();
     DefaultListModel classEdit = new DefaultListModel();
     DefaultTableModel tableTest = new DefaultTableModel();
-    public String classSel = "placeholder";
+    public static String classSel = "placeholder";
     DefaultTableModel classAdderT = new DefaultTableModel();
     public static String [][] students;
     public static String[][] tempStudents;
@@ -662,26 +663,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
       int pos1 = jTable1.getSelectedRow();
       row = pos1;
-      int inttot = 0, counter = 0, intavg = 0;
-        int examsnotDone = 2;
-        
-        /*
-        for (int i = 2; i < students[pos1].length - examsnotDone; i++){
-            inttot += Integer.parseInt(students[pos1][i]);
-            counter++;
-        }
-        String avg = Integer.toString(inttot/counter);*/
-      
-        jLabel12.setText(students[pos1][2] + "%");
-        jLabel14.setText(students[pos1][3] + "%");
-        jLabel16.setText(students[pos1][4] + "%");
-        jLabel18.setText(students[pos1][5] + "%");
-        jLabel20.setText(students[pos1][6] + "%");
-        jLabel22.setText(students[pos1][7] + "%");
-        jLabel24.setText(students[pos1][8] + "%");
-        jLabel3.setText(students[pos1][0]);
-        jLabel6.setText(students[pos1][1]);
-        //jLabel4.setText(avg);
+      reWriteMark(row);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
@@ -835,6 +817,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         if(row == -1){
             jLabel8.setVisible(true);
         }else{
+            testClicked = 8;
             open.setVisible(true);
         }
     }//GEN-LAST:event_jLabel27MouseClicked
@@ -843,6 +826,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         if(row == -1){
             jLabel8.setVisible(true);
         }else{
+            testClicked = 9;
             open.setVisible(true);
         }
     }//GEN-LAST:event_jLabel28MouseClicked
@@ -906,7 +890,47 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             qe.setVisible(true);
         }
     }//GEN-LAST:event_jLabel24MouseClicked
-
+    
+    public static void reWriteMark(int pos1){
+        int inttot = 0;
+        int counter = 0;
+        
+        for (int i = 2; i < students[pos1].length-2; i++){
+            if(students[pos1][i].equals(" ")){}
+            else{
+                inttot += Double.parseDouble(students[pos1][i]);
+                counter++;
+            }
+        }
+        //This part of the code is completely broken
+        String avg = Double.toString(((inttot/counter)/100)*70);
+        if(Exam.firstexam == 0 && Exam.secondexam == 0){
+            Exam.finalmark = ((Double.parseDouble(avg))/70)*100;
+        }
+        else if(Exam.firstexam > 0 && Exam.secondexam > 0){
+            Exam.examworth = Double.toString(Math.round(((Exam.firstexam/100) * 15) + ((Exam.secondexam/100) * 15)));
+            Exam.finalmark = (Double.parseDouble(Exam.examworth) + Double.parseDouble(avg))/100;
+        }else if(Exam.firstexam > 0){
+            Exam.examworth = Double.toString(Math.round((Exam.firstexam/100) * 30));
+            Exam.finalmark = (Double.parseDouble(Exam.examworth) + Double.parseDouble(avg))/100;
+        }else{
+            Exam.examworth = Double.toString(Math.round((Exam.secondexam/100) * 30));
+            Exam.finalmark = (Double.parseDouble(Exam.examworth) + Double.parseDouble(avg))/100;
+        }
+        
+        jLabel12.setText(students[pos1][2] + "%");
+        jLabel14.setText(students[pos1][3] + "%");
+        jLabel16.setText(students[pos1][4] + "%");
+        jLabel18.setText(students[pos1][5] + "%");
+        jLabel20.setText(students[pos1][6] + "%");
+        jLabel22.setText(students[pos1][7] + "%");
+        jLabel24.setText(students[pos1][8] + "%");
+        jLabel27.setText(students[pos1][9] + "%");
+        jLabel28.setText(students[pos1][10] + "%");        
+        jLabel3.setText(students[pos1][0]);
+        jLabel6.setText(students[pos1][1]);
+        jLabel4.setText(Double.toString(Exam.finalmark));
+    }
     /**
      * @param args the command line arguments
      */
@@ -951,33 +975,33 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton8;
-    private javax.swing.JLabel jLabel1;
+    private static javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private static javax.swing.JLabel jLabel11;
+    private static javax.swing.JLabel jLabel12;
+    private static javax.swing.JLabel jLabel13;
+    private static javax.swing.JLabel jLabel14;
+    private static javax.swing.JLabel jLabel15;
+    private static javax.swing.JLabel jLabel16;
+    private static javax.swing.JLabel jLabel17;
+    private static javax.swing.JLabel jLabel18;
+    private static javax.swing.JLabel jLabel19;
+    private static javax.swing.JLabel jLabel2;
+    private static javax.swing.JLabel jLabel20;
+    private static javax.swing.JLabel jLabel21;
+    private static javax.swing.JLabel jLabel22;
+    private static javax.swing.JLabel jLabel23;
+    private static javax.swing.JLabel jLabel24;
+    private static javax.swing.JLabel jLabel25;
+    private static javax.swing.JLabel jLabel26;
+    private static javax.swing.JLabel jLabel27;
+    private static javax.swing.JLabel jLabel28;
+    private static javax.swing.JLabel jLabel3;
+    private static javax.swing.JLabel jLabel4;
+    private static javax.swing.JLabel jLabel5;
+    private static javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private static javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;

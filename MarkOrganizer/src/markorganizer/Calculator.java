@@ -14,6 +14,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList; 
 import java.util.Collections;
 import java.io.IOException;
+import java.lang.Math;
 
 public class Calculator extends javax.swing.JFrame {
 ArrayList<Double> testmarkssorted = new ArrayList<Double>();
@@ -21,7 +22,7 @@ double[] testmarksstring = new double[MarkOrganizerUI.testmarks.size()];
 double testaverage;
 String testaverageString;
 double testTotal = 0;
-String testworth;
+public static String testworth;
 double median;
 FileSetup no = new FileSetup();
 Exam yes = new Exam();
@@ -67,8 +68,6 @@ int req;
         jLabel1 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Enter test marks ONLY here", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 18))); // NOI18N
 
@@ -215,8 +214,8 @@ int req;
                     MarkOrganizerUI.testmarks.set(MarkOrganizerUI.testClicked -1, (a/b)*100);
                     MarkOrganizerUI.units++;
                     jTextField1.setText(String.valueOf(MarkOrganizerUI.units));
-                    MarkOrganizerUI.students[MarkOrganizerUI.row][MarkOrganizerUI.testClicked + 1] = Double.toString((a/b)*100);
-                    FileSetup.saveData(" ", MarkOrganizerUI.students);
+                    MarkOrganizerUI.students[MarkOrganizerUI.row][MarkOrganizerUI.testClicked + 1] = Double.toString(Math.round((a/b)*100));
+                    FileSetup.saveData(MarkOrganizerUI.classSel, MarkOrganizerUI.students);
                 }
             }catch(NumberFormatException e){
                 Error.setVisible(true);
@@ -254,7 +253,8 @@ int req;
         for(int y = 0; y < 9; y++){
             System.out.println("The array is:" + MarkOrganizerUI.students[MarkOrganizerUI.row][y]);
         }
-
+        
+        MarkOrganizerUI.reWriteMark(MarkOrganizerUI.row);
         /*else{
             sortlen = (sortlen + 1)/2;
             int middle = Integer.parseInt(String.valueOf(sortlen));

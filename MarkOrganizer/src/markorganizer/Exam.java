@@ -5,16 +5,18 @@
  */
 package markorganizer;
 import java.text.DecimalFormat;
-
+import java.io.IOException;
 /**
  *
  * @author mejib
  */
 public class Exam extends javax.swing.JFrame {
-double firstexam = 0;
-double secondexam = 0;
-String examworth;
-double finalmark;
+public static double firstexam = 0;
+public static double secondexam = 0;
+public static String examworth;
+public static double finalmark;
+double outOf1 = 0;
+double outOf2 = 0;
     /**
      * Creates new form Exam
      */
@@ -37,13 +39,15 @@ double finalmark;
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         Final = new javax.swing.JButton();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,10 +56,6 @@ double finalmark;
         jLabel1.setText("Exam 1:");
 
         jLabel2.setText("Exam 2:");
-
-        jLabel3.setText("/100");
-
-        jLabel4.setText("/100");
 
         jLabel5.setText("Final average:");
 
@@ -70,6 +70,10 @@ double finalmark;
             }
         });
 
+        jLabel8.setText("/");
+
+        jLabel9.setText("/");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -78,21 +82,28 @@ double finalmark;
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel9)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -100,7 +111,7 @@ double finalmark;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6))
                     .addComponent(Final))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,13 +120,15 @@ double finalmark;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Final)
                 .addGap(18, 18, 18)
@@ -145,38 +158,43 @@ double finalmark;
     }// </editor-fold>//GEN-END:initComponents
 
     private void FinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalActionPerformed
+        firstexam = 0;
+        secondexam = 0;
         if(jTextField1.getText().isEmpty() && jTextField2.getText().isEmpty()){
             jLabel7.setVisible(true);
         }else if(jTextField1.getText().isEmpty()){
             jLabel7.setVisible(false);
             try{
                 firstexam = Double.parseDouble(jTextField2.getText());
-                MarkOrganizerUI.testmarks.add(firstexam);
-                MarkOrganizerUI.students[MarkOrganizerUI.row][9] = String.valueOf(firstexam);
+                outOf1 = Double.parseDouble(jTextField5.getText());
+                MarkOrganizerUI.students[MarkOrganizerUI.row][9] = Double.toString(Math.round((firstexam/outOf1)*100));
+                FileSetup.saveData(MarkOrganizerUI.classSel, MarkOrganizerUI.students);
             }catch(NumberFormatException q){
                 jLabel7.setVisible(true);
-            }            
+            }catch(IOException e){}
         }else if(jTextField2.getText().isEmpty()){
             jLabel7.setVisible(false);
             try{
                 firstexam = Double.parseDouble(jTextField1.getText());
-                MarkOrganizerUI.testmarks.add(firstexam);
-                MarkOrganizerUI.students[MarkOrganizerUI.row][9] = String.valueOf(firstexam);
+                outOf1 = Double.parseDouble(jTextField4.getText());
+                MarkOrganizerUI.students[MarkOrganizerUI.row][9] = Double.toString(Math.round((firstexam/outOf1)*100));
+                FileSetup.saveData(MarkOrganizerUI.classSel, MarkOrganizerUI.students);
             }catch(NumberFormatException q){
                 jLabel7.setVisible(true);
-            }            
+            }catch(IOException e){}            
         }else{
             jLabel7.setVisible(false);
             try{
                 firstexam = Double.parseDouble(jTextField1.getText());
+                outOf1 = Double.parseDouble(jTextField4.getText());
                 secondexam = Double.parseDouble(jTextField2.getText());
-                MarkOrganizerUI.testmarks.add(firstexam);
-                MarkOrganizerUI.testmarks.add(secondexam);
-                MarkOrganizerUI.students[MarkOrganizerUI.row][9] = String.valueOf(firstexam);
-                MarkOrganizerUI.students[MarkOrganizerUI.row][10] = String.valueOf(secondexam);
+                outOf2 = Double.parseDouble(jTextField5.getText());
+                MarkOrganizerUI.students[MarkOrganizerUI.row][9] = Double.toString(Math.round((firstexam/outOf1)*100));
+                MarkOrganizerUI.students[MarkOrganizerUI.row][10] = Double.toString(Math.round((secondexam/outOf2)*100));
+                FileSetup.saveData(MarkOrganizerUI.classSel, MarkOrganizerUI.students);
             }catch(NumberFormatException q){
                 jLabel7.setVisible(true);
-            }    
+            }catch(IOException e){}
         }
     }//GEN-LAST:event_FinalActionPerformed
 
@@ -239,14 +257,16 @@ double finalmark;
     private javax.swing.JButton Final;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
