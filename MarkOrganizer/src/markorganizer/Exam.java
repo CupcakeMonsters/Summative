@@ -11,8 +11,8 @@ import java.io.IOException;
  * @author mejib
  */
 public class Exam extends javax.swing.JFrame {
-public static double firstexam = 0;
-public static double secondexam = 0;
+public static double firstexam = -1;
+public static double secondexam = -1;
 public static String examworth;
 public static double finalmark;
 double outOf1 = 0;
@@ -23,6 +23,7 @@ double outOf2 = 0;
     public Exam() {
         initComponents();
         jLabel7.setVisible(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
     }
 
     /**
@@ -48,6 +49,7 @@ double outOf2 = 0;
         jTextField5 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,7 +65,7 @@ double outOf2 = 0;
 
         jLabel7.setText("Invalid input");
 
-        Final.setText("Display final average");
+        Final.setText("Continue");
         Final.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FinalActionPerformed(evt);
@@ -73,6 +75,9 @@ double outOf2 = 0;
         jLabel8.setText("/");
 
         jLabel9.setText("/");
+
+        jLabel3.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel3.setText("-");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,15 +108,21 @@ double outOf2 = 0;
                                 .addComponent(jLabel7))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(15, 15, 15))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6))
-                    .addComponent(Final))
-                .addGap(15, 15, 15))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Final)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +141,9 @@ double outOf2 = 0;
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Final)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Final)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -156,10 +169,12 @@ double outOf2 = 0;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void displayStudName(String name){
+        jLabel3.setText(name);
+    }
     private void FinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalActionPerformed
-        firstexam = 0;
-        secondexam = 0;
+        firstexam = -1;
+        secondexam = -1;
         if(jTextField1.getText().isEmpty() && jTextField2.getText().isEmpty()){
             jLabel7.setVisible(true);
         }else if(jTextField1.getText().isEmpty()){
@@ -167,7 +182,7 @@ double outOf2 = 0;
             try{
                 firstexam = Double.parseDouble(jTextField2.getText());
                 outOf1 = Double.parseDouble(jTextField5.getText());
-                MarkOrganizerUI.students[MarkOrganizerUI.row][9] = Double.toString(Math.round((firstexam/outOf1)*100));
+                MarkOrganizerUI.students[MarkOrganizerUI.row][MarkOrganizerUI.testClicked+1] = Double.toString(Math.round((firstexam/outOf1)*100));
                 FileSetup.saveData(MarkOrganizerUI.classSel, MarkOrganizerUI.students);
             }catch(NumberFormatException q){
                 jLabel7.setVisible(true);
@@ -177,7 +192,7 @@ double outOf2 = 0;
             try{
                 firstexam = Double.parseDouble(jTextField1.getText());
                 outOf1 = Double.parseDouble(jTextField4.getText());
-                MarkOrganizerUI.students[MarkOrganizerUI.row][9] = Double.toString(Math.round((firstexam/outOf1)*100));
+                MarkOrganizerUI.students[MarkOrganizerUI.row][MarkOrganizerUI.testClicked+1] = Double.toString(Math.round((firstexam/outOf1)*100));
                 FileSetup.saveData(MarkOrganizerUI.classSel, MarkOrganizerUI.students);
             }catch(NumberFormatException q){
                 jLabel7.setVisible(true);
@@ -196,6 +211,7 @@ double outOf2 = 0;
                 jLabel7.setVisible(true);
             }catch(IOException e){}
         }
+        MarkOrganizerUI.reWriteMark(MarkOrganizerUI.row);
     }//GEN-LAST:event_FinalActionPerformed
 
     /**
@@ -257,6 +273,7 @@ double outOf2 = 0;
     private javax.swing.JButton Final;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

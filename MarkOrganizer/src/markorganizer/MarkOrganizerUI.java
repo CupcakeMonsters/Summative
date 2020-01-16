@@ -30,6 +30,8 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     public String[] classes;
     Exam open = new Exam();
     public static int testClicked = 0;
+    public static double finals = 0;
+    public static String examOnly = "";
     /**
      * Creates new form MarkOrganizerUI
      */
@@ -108,6 +110,8 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
 
         openingWindow.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         openingWindow.setMinimumSize(new java.awt.Dimension(376, 134));
@@ -362,7 +366,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                         .addComponent(jLabel6)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -516,6 +520,11 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel29.setText("Click on mark to edit it");
+
+        jLabel30.setText("If there's a summative and an exam enter the summative as Exam 1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -527,9 +536,12 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton12))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel17)
@@ -540,10 +552,10 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel27)
-                                    .addComponent(jLabel18)
                                     .addComponent(jLabel16)
                                     .addComponent(jLabel14)
-                                    .addComponent(jLabel12))
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel18))
                                 .addGap(34, 34, 34)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -559,13 +571,15 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel26)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel28))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton12)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(jLabel28))
+                                    .addComponent(jLabel29))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel30)
+                .addGap(41, 41, 41))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton11, jButton12});
@@ -583,10 +597,9 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -601,7 +614,9 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel23)
                                     .addComponent(jLabel24))
-                                .addGap(46, 46, 46)
+                                .addGap(14, 14, 14)
+                                .addComponent(jLabel29)
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel26)
                                     .addComponent(jLabel28)))
@@ -624,8 +639,9 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                                 .addGap(26, 26, 26)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel25)
-                                    .addComponent(jLabel27))))
-                        .addGap(20, 20, 20))))
+                                    .addComponent(jLabel27))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -817,6 +833,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         if(row == -1){
             jLabel8.setVisible(true);
         }else{
+            open.displayStudName(students[row][0]);
             testClicked = 8;
             open.setVisible(true);
         }
@@ -826,6 +843,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         if(row == -1){
             jLabel8.setVisible(true);
         }else{
+            open.displayStudName(students[row][0]);
             testClicked = 9;
             open.setVisible(true);
         }
@@ -896,26 +914,26 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         int counter = 0;
         
         for (int i = 2; i < students[pos1].length-2; i++){
-            if(students[pos1][i].equals(" ")){}
+            if(students[pos1][i].equals("")){}
             else{
                 inttot += Double.parseDouble(students[pos1][i]);
                 counter++;
             }
         }
-        //This part of the code is completely broken
-        String avg = Double.toString(((inttot/counter))*70);
-        if(Exam.firstexam == 0 && Exam.secondexam == 0){
-            Exam.finalmark = ((Double.parseDouble(avg))/70);
+        
+        String avg = Double.toString((inttot/counter));
+        if(students[pos1][9].equals("0") && students[pos1][10].equals("0")){
+            finals = ((Double.parseDouble(avg)));
         }
-        else if(Exam.firstexam > 0 && Exam.secondexam > 0){
-            Exam.examworth = Double.toString(Math.round(((Exam.firstexam/100) * 15) + ((Exam.secondexam/100) * 15)));
-            Exam.finalmark = (Double.parseDouble(Exam.examworth) + Double.parseDouble(avg))/100;
-        }else if(Exam.firstexam > 0){
-            Exam.examworth = Double.toString(Math.round((Exam.firstexam/100) * 30));
-            Exam.finalmark = (Double.parseDouble(Exam.examworth) + Double.parseDouble(avg))/100;
+        else if(!"0".equals(students[pos1][9]) && !"0".equals(students[pos1][10])){
+            examOnly = Double.toString(Math.round((Double.parseDouble(students[pos1][9])*0.15) + (Double.parseDouble(students[pos1][10])*0.15)));
+            finals = Math.round((Double.parseDouble(examOnly) + (Double.parseDouble(avg))*0.7));
+        }else if(!"0".equals(students[pos1][9])){
+            examOnly = Double.toString(Math.round(Double.parseDouble(students[pos1][9])*0.3));
+            finals = Math.round((Double.parseDouble(examOnly) + (Double.parseDouble(avg))*0.7));
         }else{
-            Exam.examworth = Double.toString(Math.round((Exam.secondexam/100) * 30));
-            Exam.finalmark = (Double.parseDouble(Exam.examworth) + Double.parseDouble(avg))/100;
+            examOnly = Double.toString(Math.round(Double.parseDouble(students[pos1][10])*0.3));
+            finals = Math.round((Double.parseDouble(examOnly) + (Double.parseDouble(avg))*0.7));
         }
         
         jLabel12.setText(students[pos1][2] + "%");
@@ -929,7 +947,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jLabel28.setText(students[pos1][10] + "%");        
         jLabel3.setText(students[pos1][0]);
         jLabel6.setText(students[pos1][1]);
-        jLabel4.setText(Double.toString(Exam.finalmark));
+        jLabel4.setText(Double.toString(finals));
     }
     /**
      * @param args the command line arguments
@@ -996,7 +1014,9 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     private static javax.swing.JLabel jLabel26;
     private static javax.swing.JLabel jLabel27;
     private static javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private static javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private static javax.swing.JLabel jLabel4;
     private static javax.swing.JLabel jLabel5;
     private static javax.swing.JLabel jLabel6;

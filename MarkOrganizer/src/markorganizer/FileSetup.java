@@ -118,6 +118,13 @@ public class FileSetup {
     public static void saveData(String filePath, String[][]students) throws IOException{
         if("placeholder".equals(filePath)){}//making sure there is actually a file to save data to
         else{
+            for(String[] redo:students){
+                for(String change: redo){
+                    if(redo.equals("0")){
+                        
+                    }
+                }
+            }
             try{
                 writer = new FileWriter(filePath + ".txt");
                 write = new BufferedWriter(writer);
