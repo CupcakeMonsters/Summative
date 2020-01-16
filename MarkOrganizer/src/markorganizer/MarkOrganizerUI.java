@@ -903,9 +903,9 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             }
         }
         //This part of the code is completely broken
-        String avg = Double.toString(((inttot/counter)/100)*70);
+        String avg = Double.toString(((inttot/counter))*70);
         if(Exam.firstexam == 0 && Exam.secondexam == 0){
-            Exam.finalmark = ((Double.parseDouble(avg))/70)*100;
+            Exam.finalmark = ((Double.parseDouble(avg))/70);
         }
         else if(Exam.firstexam > 0 && Exam.secondexam > 0){
             Exam.examworth = Double.toString(Math.round(((Exam.firstexam/100) * 15) + ((Exam.secondexam/100) * 15)));
