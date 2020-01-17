@@ -23,7 +23,6 @@ double outOf2 = 0;
     public Exam() {
         initComponents();
         jLabel7.setVisible(false);
-        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
     }
 
     /**
@@ -40,9 +39,6 @@ double outOf2 = 0;
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         Final = new javax.swing.JButton();
         jTextField4 = new javax.swing.JTextField();
@@ -51,17 +47,11 @@ double outOf2 = 0;
         jLabel9 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Input the exam mark(s) here", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 14))); // NOI18N
 
         jLabel1.setText("Exam 1:");
 
         jLabel2.setText("Exam 2:");
-
-        jLabel5.setText("Final average:");
-
-        jLabel6.setText("/100 (without quizzes)");
 
         jLabel7.setText("Invalid input");
 
@@ -111,17 +101,9 @@ double outOf2 = 0;
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(15, 15, 15))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Final)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)))
+                        .addComponent(Final)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,12 +126,6 @@ double outOf2 = 0;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Final)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -164,7 +140,7 @@ double outOf2 = 0;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(46, 46, 46))
         );
 
         pack();
@@ -218,10 +194,6 @@ double outOf2 = 0;
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        Exam ce = new Exam();
-        Calculator re = new Calculator();
-        DecimalFormat mark = new DecimalFormat("##.##");
-        MarkOrganizerUI wrote = new MarkOrganizerUI();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -251,22 +223,6 @@ double outOf2 = 0;
                 new Exam().setVisible(true);
             }
         });
-        if(ce.firstexam > 0 && ce.secondexam > 0){
-            ce.examworth = mark.format(((ce.firstexam/100) * 15) + ((ce.secondexam/100) * 15));
-            ce.finalmark = Double.parseDouble(ce.examworth) + Double.parseDouble(re.testworth);
-            ce.jTextField3.setText(String.valueOf(ce.finalmark));
-        }else if(ce.firstexam > 0){
-            ce.examworth = mark.format((ce.firstexam/100) * 30);
-            ce.finalmark = Double.parseDouble(ce.examworth) + Double.parseDouble(re.testworth);
-            ce.jTextField3.setText(String.valueOf(ce.finalmark));
-        }else{
-            ce.examworth = mark.format((ce.secondexam/100) * 30);
-            ce.finalmark = Double.parseDouble(ce.examworth) + Double.parseDouble(re.testworth);
-            ce.jTextField3.setText(String.valueOf(ce.finalmark));
-        }
-        for(int e = 1; e < 3; e++){
-            wrote.students[MarkOrganizerUI.row][e + 8] = String.valueOf(MarkOrganizerUI.testmarks.get(e + 8));
-        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -274,15 +230,12 @@ double outOf2 = 0;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables

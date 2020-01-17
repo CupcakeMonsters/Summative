@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+ * Marwan, Masrur, Jared
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -14,7 +14,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList; 
 import java.util.Collections;
 import java.io.IOException;
-import java.lang.Math;
+import java.lang.*;
 
 public class Calculator extends javax.swing.JFrame {
 ArrayList<Double> testmarkssorted = new ArrayList<Double>();
@@ -27,6 +27,7 @@ double median;
 FileSetup no = new FileSetup();
 Exam yes = new Exam();
 int req;
+public DecimalFormat med = new DecimalFormat("##.##");
 /**
      * Creates new form Calculator
      */
@@ -194,7 +195,7 @@ int req;
     public void displayStudentName(String name){
         jLabel2.setText(name);
     }
-    
+    //Adding marks working with averages by saving accordingly
     private void ContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueActionPerformed
         if(!Testmarkinput.getText().isEmpty() && !jTextField2.getText().isEmpty()){
             Error.setVisible(false);
@@ -225,7 +226,6 @@ int req;
             Testmarkinput.setText("");
             jTextField2.setText("");
         }
-        DecimalFormat med = new DecimalFormat("##.##");
         testTotal = 0;
         for(double c: MarkOrganizerUI.testmarks){
             testTotal += c;
@@ -234,38 +234,55 @@ int req;
         Testaveragedisplay.setText(String.valueOf(med.format(testaverage)));
         testmarkssorted = MarkOrganizerUI.testmarks;
         Collections.sort(testmarkssorted);
-        if(MarkOrganizerUI.units % 2 != 0){
-            int medindex = MarkOrganizerUI.testmarks.size()/2;
-            median = testmarkssorted.get(medindex);
-            Mediandisplay.setText(String.valueOf(med.format(median)));
-        }else{
-            int medindex = MarkOrganizerUI.testmarks.size()/2;
-            int medindexx = medindex - 1;
-            median = (testmarkssorted.get(medindex) + testmarkssorted.get(medindexx))/2;
-            Mediandisplay.setText(String.valueOf(med.format(median)));
-        }
-        
-        /*for(int p = 0; p < MarkOrganizerUI.testmarks.size(); p++){
-            if(MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2] == null && MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2].equals("")){
-                MarkOrganizerUI.students[MarkOrganizerUI.row][p + 2] = String.valueOf(MarkOrganizerUI.testmarks.get(p));
-            }
-        }*/
-        for(int y = 0; y < 9; y++){
-            System.out.println("The array is:" + MarkOrganizerUI.students[MarkOrganizerUI.row][y]);
-        }
-        
         MarkOrganizerUI.reWriteMark(MarkOrganizerUI.row);
-        /*else{
-            sortlen = (sortlen + 1)/2;
-            int middle = Integer.parseInt(String.valueOf(sortlen));
-            median = testmarkssorted.get(middle);
-            Mediandisplay.setText(String.valueOf(med.format(median)));
-        }*/
     }//GEN-LAST:event_ContinueActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    //calculating median
+    public int median2(int[] studen){
+        int n = studen.length;  
+        int mediaN = 0;
+        for (int j = 1; j < n; j++) {  
+            int key = studen[j];  
+            int i = j-1;  
+            while ( (i > -1) && ( studen [i] > key ) ) {  
+                studen [i+1] = studen [i];  
+                i--;  
+            }  
+            studen[i+1] = key;  
+        }
+        if (studen.length % 2 == 0){
+            mediaN = (studen[(int)Math.ceil(n/2)] + studen[(int)Math.ceil(n/2)-1])/2;
+        }
+        else{
+            mediaN = studen[(int)Math.ceil(n/2)];
+        }
+        return mediaN;
+    }
+    //Calculating median
+    public int median(String[][] students){
+        int[] marks = new int[students.length];
+        if(marks.length==0){
+            return 0;
+        }
+        int intot = 0;
+        int count = 0;
+        int studCount = 0;
+        for (String[] stud : students){
+            for (int i = 2; i < 11; i++){
+                if(stud[i].equals("0")){}
+                else{
+                    intot += (int)Double.parseDouble(stud[i]);
+                    count++;
+                }
+            }
+            marks[studCount] = (intot/count);
+            studCount++;
+        }
+        return median2(marks);
+    }
     public static void main(String args[]) {
         MarkOrganizerUI write = new MarkOrganizerUI();
         Calculator ec = new Calculator();

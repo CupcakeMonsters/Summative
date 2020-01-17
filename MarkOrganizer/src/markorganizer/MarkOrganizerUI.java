@@ -80,8 +80,9 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new JTable(tableTest){
             public boolean isCellEditable(int row, int column) {                                 
@@ -309,14 +310,10 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Edit Marks");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         jLabel8.setText("Select a student first!");
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel31.setText("Class Median:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -342,15 +339,14 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                         .addGap(127, 127, 127))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addGap(91, 91, 91)
+                        .addComponent(jLabel31)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addContainerGap())))
         );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2});
-
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -374,12 +370,14 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jButton2))))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel31)
+                                .addComponent(jLabel32)))
+                        .addContainerGap())))
         );
 
         /*
@@ -701,7 +699,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             String [] temp = {stud[0], stud[1]};
             tableTest.addRow(temp);
         }
-        
+        jLabel32.setText(String.valueOf(qe.median(students)));
         this.setVisible(true);
     }//GEN-LAST:event_jList1MouseClicked
 
@@ -767,7 +765,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         tempStudents = new String[classAdderT.getRowCount()-1][11];
         for (String[] fill : tempStudents){
             for (int i = 0; i < 11; i++){
-                fill[i] = " ";
+                fill[i] = "0";
             }
         }
         
@@ -799,25 +797,6 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         }
         catch(IOException e){}
     }//GEN-LAST:event_jButton8ActionPerformed
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        units = 0;
-        if(row == -1){
-            jLabel8.setVisible(true);
-        }else{
-            jLabel8.setVisible(false);
-            System.out.println(row);/*
-            for(int p = 0; p < 7; p++){
-                if(students[row][p + 2] != null && students[row][p + 2] != ""){
-                    units++;
-                }else{
-                    break;
-            }
-            }*/
-            System.out.println(units);
-            qe.setVisible(true);
-        }  
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         if(row == -1){
@@ -914,13 +893,13 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         int counter = 0;
         
         for (int i = 2; i < students[pos1].length-2; i++){
-            if(students[pos1][i].equals("")){}
+            if(students[pos1][i].equals("0")){}
             else{
                 inttot += Double.parseDouble(students[pos1][i]);
                 counter++;
             }
         }
-        
+        if(counter==0){counter = 1;}
         String avg = Double.toString((inttot/counter));
         if(students[pos1][9].equals("0") && students[pos1][10].equals("0")){
             finals = ((Double.parseDouble(avg)));
@@ -989,7 +968,6 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton8;
@@ -1017,6 +995,8 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private static javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private static javax.swing.JLabel jLabel4;
     private static javax.swing.JLabel jLabel5;
     private static javax.swing.JLabel jLabel6;
