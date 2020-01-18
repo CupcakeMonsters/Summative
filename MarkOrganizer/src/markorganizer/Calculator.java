@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+ * Marwan, Masrur, Jared
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -13,28 +13,35 @@ package markorganizer;
 import java.text.DecimalFormat;
 import java.util.ArrayList; 
 import java.util.Collections;
+import java.io.IOException;
+import java.lang.*;
+
 public class Calculator extends javax.swing.JFrame {
-ArrayList<Double> testmarks = new ArrayList<Double>();
-ArrayList<Double> quizmarks = new ArrayList<Double>();
-ArrayList<String> testmarksstring = new ArrayList<String>();
-ArrayList<String> quizmarksstring = new ArrayList<String>();
 ArrayList<Double> testmarkssorted = new ArrayList<Double>();
+double[] testmarksstring = new double[MarkOrganizerUI.testmarks.size()]; 
 double testaverage;
-double quizaverage;
 String testaverageString;
-String quizaverageString;
 double testTotal = 0;
-double quizTotal = 0;
-String testworth;
+public static String testworth;
 double median;
-int units;
 FileSetup no = new FileSetup();
+Exam yes = new Exam();
+int req;
+public DecimalFormat med = new DecimalFormat("##.##");
 /**
      * Creates new form Calculator
      */
     public Calculator() {
         initComponents();
+        req = MarkOrganizerUI.units;
+        System.out.println("req : " + req);
         Error.setVisible(false);
+        if(MarkOrganizerUI.row == -1){
+            this.setVisible(false);
+        }
+        jTextField1.setText(String.valueOf(req));
+        System.out.println("MarkOrganizerUI.units : " + MarkOrganizerUI.units);
+        
     }
 
     /**
@@ -48,112 +55,41 @@ FileSetup no = new FileSetup();
 
         jPanel1 = new javax.swing.JPanel();
         Testmark = new javax.swing.JLabel();
-        Quizmark1 = new javax.swing.JLabel();
-        Quizmark2 = new javax.swing.JLabel();
         Testmarkinput = new javax.swing.JTextField();
-        Quizmark1input = new javax.swing.JTextField();
-        Quizmark2input = new javax.swing.JTextField();
         Testaverage = new javax.swing.JLabel();
-        Quizaverage = new javax.swing.JLabel();
         Testaveragedisplay = new javax.swing.JTextField();
-        Quizaveragedisplay = new javax.swing.JTextField();
-        thantestaverage = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         Testmedian = new javax.swing.JLabel();
         Mediandisplay = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        Restart = new javax.swing.JButton();
         Error = new javax.swing.JLabel();
-        Finish = new javax.swing.JButton();
         Continue = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Enter marks here", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Enter test marks ONLY here", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 18))); // NOI18N
 
         Testmark.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Testmark.setText("Test mark:");
 
-        Quizmark1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Quizmark1.setText("Quiz mark:");
-
-        Quizmark2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Quizmark2.setText("Quiz mark:");
-
-        Testmarkinput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TestmarkinputActionPerformed(evt);
-            }
-        });
-
-        Quizmark1input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Quizmark1inputActionPerformed(evt);
-            }
-        });
-
-        Quizmark2input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Quizmark2inputActionPerformed(evt);
-            }
-        });
-
         Testaverage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Testaverage.setText("Test average is: ");
 
-        Quizaverage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Quizaverage.setText("Quiz average is: ");
-
-        Quizaveragedisplay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                QuizaveragedisplayActionPerformed(evt);
-            }
-        });
-
-        thantestaverage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        thantestaverage.setText("than test average");
-
-        jLabel7.setText("/100");
-
-        jLabel8.setText("/100");
-
-        jLabel9.setText("/100");
+        jLabel7.setText("/");
 
         jLabel10.setText("/100");
 
         Testmedian.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Testmedian.setText("Test median is:");
 
-        Mediandisplay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MediandisplayActionPerformed(evt);
-            }
-        });
-
         jLabel12.setText("/100");
-
-        Restart.setText("Restart");
-        Restart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RestartActionPerformed(evt);
-            }
-        });
 
         Error.setText("Invalid input");
 
-        Finish.setText("Finish and display average");
-        Finish.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FinishActionPerformed(evt);
-            }
-        });
-
-        Continue.setText("Continue?");
+        Continue.setText("Continue");
         Continue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ContinueActionPerformed(evt);
@@ -162,112 +98,82 @@ FileSetup no = new FileSetup();
 
         jLabel1.setText("unit tests entered");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel2.setText("-");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Testmark)
+                        .addComponent(Testmedian)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Mediandisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Testmarkinput, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(Error))
+                        .addComponent(jLabel12))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(Testmedian)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Mediandisplay))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(Testaverage)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Testaveragedisplay))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(Quizaverage)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Quizaveragedisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Testaverage)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Testaveragedisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(thantestaverage)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel12)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(Quizmark1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Testmark)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Quizmark1input, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Testmarkinput, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(Quizmark2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(Quizmark2input, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel9))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(Continue)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(Finish))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Restart)
-                            .addComponent(jLabel1))))
-                .addGap(30, 30, 30))
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Continue))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Error)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Testmark)
-                    .addComponent(Testmarkinput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(Error))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Quizmark1)
-                        .addComponent(Quizmark1input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Testmark)
+                        .addComponent(jLabel7)
+                        .addComponent(Error)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Testmarkinput, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Quizmark2)
-                        .addComponent(Quizmark2input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel9))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Restart)
-                    .addComponent(Finish)
-                    .addComponent(Continue))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Continue))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel2)))
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Testaverage)
                     .addComponent(Testaveragedisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Quizaverage)
-                    .addComponent(Quizaveragedisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(thantestaverage))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Testmedian)
                     .addComponent(Mediandisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addComponent(jLabel12)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -278,130 +184,107 @@ FileSetup no = new FileSetup();
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void TestmarkinputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TestmarkinputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TestmarkinputActionPerformed
-
-    private void Quizmark1inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Quizmark1inputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Quizmark1inputActionPerformed
-
-    private void Quizmark2inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Quizmark2inputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Quizmark2inputActionPerformed
-
-    private void QuizaveragedisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuizaveragedisplayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_QuizaveragedisplayActionPerformed
-
-    private void MediandisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MediandisplayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MediandisplayActionPerformed
-
-    private void RestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestartActionPerformed
-        // TODO add your handling code here:
-        testmarks.clear();
-        quizmarks.clear();
-        Testmarkinput.setText("");
-        Quizmark1input.setText("");
-        Quizmark2input.setText("");
-    }//GEN-LAST:event_RestartActionPerformed
-
-    private void FinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinishActionPerformed
-        // TODO add your handling code here:
-        for(double c: testmarks){
+    
+    public void displayStudentName(String name){
+        jLabel2.setText(name);
+    }
+    //Adding marks working with averages by saving accordingly
+    private void ContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueActionPerformed
+        if(!Testmarkinput.getText().isEmpty() && !jTextField2.getText().isEmpty()){
+            Error.setVisible(false);
+            try{
+                double a = Double.parseDouble((Testmarkinput.getText()));
+                double b = Double.parseDouble(jTextField2.getText());
+                if(a>b){
+                    Error.setVisible(true);
+                }else{
+                    for(int checks = 0; checks<9; checks++){
+                        if(MarkOrganizerUI.students[MarkOrganizerUI.row][checks+2].equals(" ")){}
+                        else{
+                            MarkOrganizerUI.testmarks.add(0.0);
+                            MarkOrganizerUI.testmarks.set(checks, Double.parseDouble(MarkOrganizerUI.students[MarkOrganizerUI.row][checks+2]));
+                        }
+                    }    
+                    MarkOrganizerUI.testmarks.set(MarkOrganizerUI.testClicked -1, (a/b)*100);
+                    MarkOrganizerUI.units++;
+                    jTextField1.setText(String.valueOf(MarkOrganizerUI.units));
+                    MarkOrganizerUI.students[MarkOrganizerUI.row][MarkOrganizerUI.testClicked + 1] = Double.toString(Math.round((a/b)*100));
+                    FileSetup.saveData(MarkOrganizerUI.classSel, MarkOrganizerUI.students);
+                }
+            }catch(NumberFormatException e){
+                Error.setVisible(true);
+                Testmarkinput.setText("");
+                jTextField2.setText("");
+            }catch(IOException e){}
+            Testmarkinput.setText("");
+            jTextField2.setText("");
+        }
+        testTotal = 0;
+        for(double c: MarkOrganizerUI.testmarks){
             testTotal += c;
         }
-        for(double d: quizmarks){
-            quizTotal += d;
-        }
-        if(quizaverage>testaverage){
-            Quizaveragedisplay.setText("higher");
-        }else{
-            Quizaveragedisplay.setText("lower");
-        }
-        Testaveragedisplay.setText(String.valueOf(testaverage));
-        testmarkssorted = testmarks;
+        testaverage = testTotal/MarkOrganizerUI.testmarks.size();
+        Testaveragedisplay.setText(String.valueOf(med.format(testaverage)));
+        testmarkssorted = MarkOrganizerUI.testmarks;
         Collections.sort(testmarkssorted);
-        double sortlen = testmarks.size();
-        if(sortlen % 2 == 0){
-            median = (testmarkssorted.get(testmarks.size()/2) + testmarkssorted.get(testmarks.size()/2 + 1))/2;
-            Mediandisplay.setText(String.valueOf(median));
-        }else{
-            int middle = Integer.parseInt(String.valueOf(sortlen/2 + 0.5));
-            median = testmarkssorted.get(middle);
-        }
-    }//GEN-LAST:event_FinishActionPerformed
-
-    private void ContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueActionPerformed
-        // TODO add your handling code here:
-        if(Testmarkinput.getText().isEmpty()){
-            Error.setVisible(true);
-            Testmarkinput.setText("");
-            Quizmark1input.setText("");
-            Quizmark2input.setText("");
-        }else if(Quizmark1input.getText().isEmpty()){
-            Error.setVisible(false);
-            try{
-                testmarks.add(Double.parseDouble(Testmarkinput.getText()));
-                quizmarks.add(Double.parseDouble(Quizmark2input.getText()));
-                units++;
-                jTextField1.setText(String.valueOf(units));
-            }catch(NumberFormatException e){
-                Error.setVisible(true);
-                Testmarkinput.setText("");
-                Quizmark1input.setText("");
-                Quizmark2input.setText("");
-            }
-            Testmarkinput.setText("");
-            Quizmark1input.setText("");
-            Quizmark2input.setText("");
-        }else if(Quizmark2input.getText().isEmpty()){
-            Error.setVisible(false);
-            try{
-                testmarks.add(Double.parseDouble(Testmarkinput.getText()));
-                quizmarks.add(Double.parseDouble(Quizmark1input.getText()));
-                units++;
-                jTextField1.setText(String.valueOf(units));
-            }catch(NumberFormatException e){
-                Error.setVisible(true);
-                Testmarkinput.setText("");
-                Quizmark1input.setText("");
-                Quizmark2input.setText("");
-            }
-            Testmarkinput.setText("");
-            Quizmark1input.setText("");
-            Quizmark2input.setText("");
-        }else if(Quizmark1input.getText().isEmpty() && Quizmark2input.getText().isEmpty()){
-            Error.setVisible(false);
-            try{
-                testmarks.add(Double.parseDouble(Testmarkinput.getText()));
-                units++;
-                jTextField1.setText(String.valueOf(units));
-            }catch(NumberFormatException e){
-                Error.setVisible(true);
-                Testmarkinput.setText("");
-                Quizmark1input.setText("");
-                Quizmark2input.setText("");
-            }
-            Testmarkinput.setText("");
-            Quizmark1input.setText("");
-            Quizmark2input.setText("");
-        }
+        MarkOrganizerUI.reWriteMark(MarkOrganizerUI.row);
     }//GEN-LAST:event_ContinueActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    //calculating median
+    public int median2(int[] studen){
+        int n = studen.length;  
+        int mediaN = 0;
+        for (int j = 1; j < n; j++) {  
+            int key = studen[j];  
+            int i = j-1;  
+            while ( (i > -1) && ( studen [i] > key ) ) {  
+                studen [i+1] = studen [i];  
+                i--;  
+            }  
+            studen[i+1] = key;  
+        }
+        if (studen.length % 2 == 0){
+            mediaN = (studen[(int)Math.ceil(n/2)] + studen[(int)Math.ceil(n/2)-1])/2;
+        }
+        else{
+            mediaN = studen[(int)Math.ceil(n/2)];
+        }
+        return mediaN;
+    }
+    //Calculating median
+    public int median(String[][] students){
+        int[] marks = new int[students.length];
+        if(marks.length==0){
+            return 0;
+        }
+        int intot = 0;
+        int count = 0;
+        int studCount = 0;
+        for (String[] stud : students){
+            for (int i = 2; i < 11; i++){
+                if(stud[i].equals("0")){}
+                else{
+                    intot += (int)Double.parseDouble(stud[i]);
+                    count++;
+                }
+            }
+            marks[studCount] = (intot/count);
+            studCount++;
+        }
+        return median2(marks);
+    }
     public static void main(String args[]) {
+        MarkOrganizerUI write = new MarkOrganizerUI();
         Calculator ec = new Calculator();
         DecimalFormat mark = new DecimalFormat("##.##");
         /* Set the Nimbus look and feel */
@@ -434,9 +317,7 @@ FileSetup no = new FileSetup();
                 new Calculator().setVisible(true);
             }
         });
-        ec.testaverage = ec.testTotal/ec.testmarks.size();
-        ec.quizaverage = ec.quizTotal/ec.quizmarks.size();
-        ec.quizaverageString = String.valueOf(ec.quizaverage);
+        ec.testaverage = ec.testTotal/MarkOrganizerUI.testmarks.size();
         ec.testaverageString = String.valueOf(ec.testaverage);
         ec.testworth = mark.format((ec.testaverage/100) * 70);
         }
@@ -444,15 +325,7 @@ FileSetup no = new FileSetup();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Continue;
     private javax.swing.JLabel Error;
-    private javax.swing.JButton Finish;
     private javax.swing.JTextField Mediandisplay;
-    private javax.swing.JLabel Quizaverage;
-    private javax.swing.JTextField Quizaveragedisplay;
-    private javax.swing.JLabel Quizmark1;
-    private javax.swing.JTextField Quizmark1input;
-    private javax.swing.JLabel Quizmark2;
-    private javax.swing.JTextField Quizmark2input;
-    private javax.swing.JButton Restart;
     private javax.swing.JLabel Testaverage;
     private javax.swing.JTextField Testaveragedisplay;
     private javax.swing.JLabel Testmark;
@@ -461,11 +334,10 @@ FileSetup no = new FileSetup();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel thantestaverage;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

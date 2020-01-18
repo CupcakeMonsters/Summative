@@ -5,6 +5,7 @@
  */
 package markorganizer;
 import java.io.*;
+import java.util.ArrayList;
 /**
  *
  * @author S331469627
@@ -12,23 +13,40 @@ import java.io.*;
 import javax.swing.*;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
+import java.lang.*;
 
 public class MarkOrganizerUI extends javax.swing.JFrame {
+    public static ArrayList<Double> testmarks = new ArrayList<Double>();
+    public static int row = -1;
+    public static int units = 0;
     DefaultListModel edit = new DefaultListModel();
     DefaultListModel classEdit = new DefaultListModel();
     DefaultTableModel tableTest = new DefaultTableModel();
-    public String [][] students;
+    public static String classSel = "placeholder";
+    DefaultTableModel classAdderT = new DefaultTableModel();
+    public static String [][] students;
+    public static String[][] tempStudents;
     Calculator qe = new Calculator();
     public String[] classes;
+    Exam open = new Exam();
+    public static int testClicked = 0;
+    public static double finals = 0;
+    public static String examOnly = "";
     /**
      * Creates new form MarkOrganizerUI
      */
     public MarkOrganizerUI() {
         initComponents();
+        classAdderT.addColumn("Name");
+        classAdderT.addColumn("Student Number");
+        String[] temp = {"",""};
+        classAdderT.addRow(temp);
+        jLabel8.setVisible(false);
         tableTest.addColumn("Name");
         tableTest.addColumn("Student Number");
         openingWindow.setLocationRelativeTo(null);
         openingWindow.setVisible(true);
+        testmarks.clear();
     }
 
     /**
@@ -45,12 +63,14 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        classSelectWindow = new javax.swing.JFrame();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new JList(classEdit);
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        addClass = new javax.swing.JFrame();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable2 = new JTable(classAdderT);
+        jButton8 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -60,7 +80,9 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new JTable(tableTest){
             public boolean isCellEditable(int row, int column) {                                 
@@ -71,6 +93,26 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jList1 = new JList(classEdit);
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
 
         openingWindow.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         openingWindow.setMinimumSize(new java.awt.Dimension(376, 134));
@@ -81,11 +123,6 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jLabel7.setText("Student Mark Organizer");
 
         jButton3.setText("Create New Class");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
 
         jButton4.setText("Edit Existing Class");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -142,57 +179,95 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        classSelectWindow.setMinimumSize(new java.awt.Dimension(400, 220));
-
-        /*
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        */
-        jScrollPane2.setViewportView(jList2);
-
-        jButton5.setText("Edit Selected Class");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+        addClass.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addClass.setMinimumSize(new java.awt.Dimension(438, 317));
+        addClass.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                addClassWindowActivated(evt);
             }
         });
 
-        jButton6.setText("Delete Selected Class");
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Class Adder"));
 
-        jButton7.setText("Back");
+        jLabel10.setText("Class Name:");
 
-        javax.swing.GroupLayout classSelectWindowLayout = new javax.swing.GroupLayout(classSelectWindow.getContentPane());
-        classSelectWindow.getContentPane().setLayout(classSelectWindowLayout);
-        classSelectWindowLayout.setHorizontalGroup(
-            classSelectWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(classSelectWindowLayout.createSequentialGroup()
+        jLabel9.setText("Student List:");
+
+        /*
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        */
+        jTable2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTable2PropertyChange(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jTable2);
+
+        jButton8.setText("Confirm Class");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(classSelectWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classSelectWindowLayout.createSequentialGroup()
-                        .addComponent(jButton6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                        .addComponent(jButton5)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel9)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton8)
                 .addContainerGap())
         );
-
-        classSelectWindowLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton5, jButton6});
-
-        classSelectWindowLayout.setVerticalGroup(
-            classSelectWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(classSelectWindowLayout.createSequentialGroup()
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(classSelectWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton8))
+        );
+
+        javax.swing.GroupLayout addClassLayout = new javax.swing.GroupLayout(addClass.getContentPane());
+        addClass.getContentPane().setLayout(addClassLayout);
+        addClassLayout.setHorizontalGroup(
+            addClassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addClassLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        addClassLayout.setVerticalGroup(
+            addClassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addClassLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -229,18 +304,26 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jLabel4.setText("null");
 
         jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Edit Marks");
+        jLabel8.setText("Select a student first!");
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel31.setText("Class Median:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -249,19 +332,21 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6)))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8)))
                         .addGap(127, 127, 127))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addGap(91, 91, 91)
+                        .addComponent(jLabel31)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addContainerGap())))
         );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2});
-
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -275,16 +360,24 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel31)
+                                .addComponent(jLabel32)))
+                        .addContainerGap())))
         );
 
         /*
@@ -329,6 +422,106 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         });
 
         jButton12.setText("Add New Class");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel11.setText("Unit 1:");
+
+        jLabel12.setText("-");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel13.setText("Unit 2:");
+
+        jLabel14.setText("-");
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel15.setText("Unit 3:");
+
+        jLabel16.setText("-");
+        jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel16MouseClicked(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel17.setText("Unit 4:");
+
+        jLabel18.setText("-");
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel18MouseClicked(evt);
+            }
+        });
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel19.setText("Unit 5:");
+
+        jLabel20.setText("-");
+        jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel20MouseClicked(evt);
+            }
+        });
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel21.setText("Unit 6:");
+
+        jLabel22.setText("-");
+        jLabel22.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel22MouseClicked(evt);
+            }
+        });
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel23.setText("Unit 7:");
+
+        jLabel24.setText("-");
+        jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel24MouseClicked(evt);
+            }
+        });
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel25.setText("Exam 1:");
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel26.setText("Exam 2:");
+
+        jLabel27.setText("-");
+        jLabel27.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel27MouseClicked(evt);
+            }
+        });
+
+        jLabel28.setText("-");
+        jLabel28.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel28MouseClicked(evt);
+            }
+        });
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel29.setText("Click on mark to edit it");
+
+        jLabel30.setText("If there's a summative and an exam enter the summative as Exam 1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -341,12 +534,50 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton12)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton12))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel25))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel27)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel18))
+                                .addGap(34, 34, 34)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel19)
+                                            .addComponent(jLabel21)
+                                            .addComponent(jLabel23))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel24)
+                                            .addComponent(jLabel22)
+                                            .addComponent(jLabel20)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel26)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel28))
+                                    .addComponent(jLabel29))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel30)
+                .addGap(41, 41, 41))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton11, jButton12});
@@ -355,17 +586,60 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton11)
-                            .addComponent(jButton12))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jButton12)
+                            .addComponent(jButton11)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel19)
+                                    .addComponent(jLabel20))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel22)
+                                    .addComponent(jLabel21))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel23)
+                                    .addComponent(jLabel24))
+                                .addGap(14, 14, 14)
+                                .addComponent(jLabel29)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel26)
+                                    .addComponent(jLabel28)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel16))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel18))
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel25)
+                                    .addComponent(jLabel27))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -382,12 +656,8 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        FileSetup.getClasses();
+        FileSetup.getClasses(); // temporary start window button
         try{
             classes = FileSetup.classList();
         } catch (IOException e){}
@@ -397,52 +667,26 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         }
         
         openingWindow.setVisible(false);
-        classSelectWindow.setLocationRelativeTo(null);
-        classSelectWindow.setVisible(true);
+        this.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         this.setLocationRelativeTo(null);
     }//GEN-LAST:event_formWindowActivated
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        String classSel = jList2.getSelectedValue();
-        FileSetup.start(classSel);
-        try{
-        students = FileSetup.read();
-        } catch(IOException e){}
-        
-        for(String[] stud : students){
-            edit.addElement(stud[0]);
-            String [] temp = {stud[0], stud[1]};
-            tableTest.addRow(temp);
-        }
-        
-        classSelectWindow.setVisible(false);
-        this.setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
       int pos1 = jTable1.getSelectedRow();
-      
-      int inttot = 0, counter = 0, intavg = 0;
-        int examsnotDone = 2;
-        
-        for (int i = 2; i < students[pos1].length - examsnotDone; i++){
-            inttot += Integer.parseInt(students[pos1][i]);
-            counter++;
-        }
-        
-        String avg = Integer.toString(inttot/counter);
-        jLabel3.setText(students[pos1][0]);
-        jLabel6.setText(students[pos1][1]);
-        jLabel4.setText(avg);
+      row = pos1;
+      reWriteMark(row);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        try{ // switch displayed students based on class selected
+        FileSetup.saveData(classSel, students);
+        classSel = jList1.getSelectedValue();
+        row = -1;
         String classSel = jList1.getSelectedValue();
         FileSetup.start(classSel);
-        try{
         students = FileSetup.read();
         } catch(IOException e){}
         
@@ -455,13 +699,12 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             String [] temp = {stud[0], stud[1]};
             tableTest.addRow(temp);
         }
-        
-        classSelectWindow.setVisible(false);
+        jLabel32.setText(String.valueOf(qe.median(students)));
         this.setVisible(true);
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        if(jList1.isSelectionEmpty()){
+        if(jList1.isSelectionEmpty()){ // delete selected class
             System.out.println("Nothing is selected");
         } else{
             int Index = jList1.getSelectedIndex();
@@ -477,9 +720,214 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             for(String cls : classes){
                 classEdit.addElement(cls);
             }
+            //hey
         }
+        
+       
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{ // upon exit, save all edits
+        FileSetup.saveData(classSel, students);
+        }catch(IOException e){}
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        this.setVisible(false);
+        addClass.setLocationRelativeTo(null);
+        addClass.setVisible(true);
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void addClassWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_addClassWindowActivated
+            
+    }//GEN-LAST:event_addClassWindowActivated
+
+    private void jTable2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable2PropertyChange
+        if (classAdderT.getRowCount() > 0){ // update editable student table: add new row if previous row is filled
+            if(classAdderT.getValueAt(classAdderT.getRowCount()-1, 0).equals("")){
+               //Do nothing 
+           } else {
+               if(classAdderT.getValueAt(classAdderT.getRowCount()-1, 1).equals("")){
+                   //Do nothing
+               } 
+               else {
+                   String[] temp = {"",""};
+                   classAdderT.addRow(temp);
+               }
+           }
+        }
+    }//GEN-LAST:event_jTable2PropertyChange
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        //On cofirming to add new class with current students:
+        String newClassName = jTextField1.getText();
+        tempStudents = new String[classAdderT.getRowCount()-1][11];
+        for (String[] fill : tempStudents){
+            for (int i = 0; i < 11; i++){
+                fill[i] = "0";
+            }
+        }
+        
+        for (int i = 0; i < (classAdderT.getRowCount()-1); i++){ // save students in table to studets array
+            tempStudents[i][0] = String.valueOf(classAdderT.getValueAt(i, 0));
+            tempStudents[i][1] = String.valueOf(classAdderT.getValueAt(i, 1));
+        }
+        //Saving the new class in a file
+        try{
+        FileSetup.saveData(newClassName, tempStudents); // create class file with current students
+        
+        String[] tempClasses = new String[classes.length+1];
+        
+        for (int i = 0; i < classes.length; i++){ // add new class name to class list
+            tempClasses[i] = classes[i];
+        }
+        tempClasses[tempClasses.length-1] = newClassName;
+        classes=tempClasses;
+        FileSetup.reWriteClass(classes);
+        
+        classEdit.clear();
+        
+        for(String cls : classes){ // rewrite class list into file
+            classEdit.addElement(cls);
+        }
+        
+        addClass.setVisible(false);
+        this.setVisible(true);
+        }
+        catch(IOException e){}
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        if(row == -1){
+            jLabel8.setVisible(true);
+        }else{
+            qe.displayStudentName(students[row][0]);
+            testClicked = 1;
+            qe.setVisible(true);
+        }
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void jLabel27MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseClicked
+        if(row == -1){
+            jLabel8.setVisible(true);
+        }else{
+            open.displayStudName(students[row][0]);
+            testClicked = 8;
+            open.setVisible(true);
+        }
+    }//GEN-LAST:event_jLabel27MouseClicked
+
+    private void jLabel28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseClicked
+        if(row == -1){
+            jLabel8.setVisible(true);
+        }else{
+            open.displayStudName(students[row][0]);
+            testClicked = 9;
+            open.setVisible(true);
+        }
+    }//GEN-LAST:event_jLabel28MouseClicked
+
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+        if(row == -1){
+            jLabel8.setVisible(true);
+        }else{
+            qe.displayStudentName(students[row][0]);
+            testClicked = 2;
+            qe.setVisible(true);
+        }
+    }//GEN-LAST:event_jLabel14MouseClicked
+
+    private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
+        if(row == -1){
+            jLabel8.setVisible(true);
+        }else{
+            qe.displayStudentName(students[row][0]);
+            testClicked = 3;
+            qe.setVisible(true);
+        }
+    }//GEN-LAST:event_jLabel16MouseClicked
+
+    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
+        if(row == -1){
+            jLabel8.setVisible(true);
+        }else{
+            qe.displayStudentName(students[row][0]);
+            testClicked = 4;
+            qe.setVisible(true);
+        }
+    }//GEN-LAST:event_jLabel18MouseClicked
+
+    private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
+        if(row == -1){
+            jLabel8.setVisible(true);
+        }else{
+            qe.displayStudentName(students[row][0]);
+            testClicked = 5;
+            qe.setVisible(true);
+        }
+    }//GEN-LAST:event_jLabel20MouseClicked
+
+    private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
+        if(row == -1){
+            jLabel8.setVisible(true);
+        }else{
+            qe.displayStudentName(students[row][0]);
+            testClicked = 6;
+            qe.setVisible(true);
+        }
+    }//GEN-LAST:event_jLabel22MouseClicked
+
+    private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
+        if(row == -1){
+            jLabel8.setVisible(true);
+        }else{
+            qe.displayStudentName(students[row][0]);
+            testClicked = 7;
+            qe.setVisible(true);
+        }
+    }//GEN-LAST:event_jLabel24MouseClicked
+    
+    public static void reWriteMark(int pos1){
+        int inttot = 0;
+        int counter = 0;
+        
+        for (int i = 2; i < students[pos1].length-2; i++){
+            if(students[pos1][i].equals("0")){}
+            else{
+                inttot += Double.parseDouble(students[pos1][i]);
+                counter++;
+            }
+        }
+        if(counter==0){counter = 1;}
+        String avg = Double.toString((inttot/counter));
+        if(students[pos1][9].equals("0") && students[pos1][10].equals("0")){
+            finals = ((Double.parseDouble(avg)));
+        }
+        else if(!"0".equals(students[pos1][9]) && !"0".equals(students[pos1][10])){
+            examOnly = Double.toString(Math.round((Double.parseDouble(students[pos1][9])*0.15) + (Double.parseDouble(students[pos1][10])*0.15)));
+            finals = Math.round((Double.parseDouble(examOnly) + (Double.parseDouble(avg))*0.7));
+        }else if(!"0".equals(students[pos1][9])){
+            examOnly = Double.toString(Math.round(Double.parseDouble(students[pos1][9])*0.3));
+            finals = Math.round((Double.parseDouble(examOnly) + (Double.parseDouble(avg))*0.7));
+        }else{
+            examOnly = Double.toString(Math.round(Double.parseDouble(students[pos1][10])*0.3));
+            finals = Math.round((Double.parseDouble(examOnly) + (Double.parseDouble(avg))*0.7));
+        }
+        
+        jLabel12.setText(students[pos1][2] + "%");
+        jLabel14.setText(students[pos1][3] + "%");
+        jLabel16.setText(students[pos1][4] + "%");
+        jLabel18.setText(students[pos1][5] + "%");
+        jLabel20.setText(students[pos1][6] + "%");
+        jLabel22.setText(students[pos1][7] + "%");
+        jLabel24.setText(students[pos1][8] + "%");
+        jLabel27.setText(students[pos1][9] + "%");
+        jLabel28.setText(students[pos1][10] + "%");        
+        jLabel3.setText(students[pos1][0]);
+        jLabel6.setText(students[pos1][1]);
+        jLabel4.setText(Double.toString(finals));
+    }
     /**
      * @param args the command line arguments
      */
@@ -516,32 +964,56 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFrame classSelectWindow;
+    private javax.swing.JFrame addClass;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton jButton8;
+    private static javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private static javax.swing.JLabel jLabel11;
+    private static javax.swing.JLabel jLabel12;
+    private static javax.swing.JLabel jLabel13;
+    private static javax.swing.JLabel jLabel14;
+    private static javax.swing.JLabel jLabel15;
+    private static javax.swing.JLabel jLabel16;
+    private static javax.swing.JLabel jLabel17;
+    private static javax.swing.JLabel jLabel18;
+    private static javax.swing.JLabel jLabel19;
+    private static javax.swing.JLabel jLabel2;
+    private static javax.swing.JLabel jLabel20;
+    private static javax.swing.JLabel jLabel21;
+    private static javax.swing.JLabel jLabel22;
+    private static javax.swing.JLabel jLabel23;
+    private static javax.swing.JLabel jLabel24;
+    private static javax.swing.JLabel jLabel25;
+    private static javax.swing.JLabel jLabel26;
+    private static javax.swing.JLabel jLabel27;
+    private static javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private static javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private static javax.swing.JLabel jLabel4;
+    private static javax.swing.JLabel jLabel5;
+    private static javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private static javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JFrame openingWindow;
     // End of variables declaration//GEN-END:variables
 }
