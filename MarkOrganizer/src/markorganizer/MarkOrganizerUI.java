@@ -44,9 +44,17 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jLabel8.setVisible(false);
         tableTest.addColumn("Name");
         tableTest.addColumn("Student Number");
-        openingWindow.setLocationRelativeTo(null);
-        openingWindow.setVisible(true);
         testmarks.clear();
+        
+        FileSetup.getClasses(); // preload classes file
+        try{
+            classes = FileSetup.classList();
+        } catch (IOException e){}
+        
+        for(String cls : classes){
+            classEdit.addElement(cls);
+        }
+        this.setVisible(true);
     }
 
     /**
@@ -58,11 +66,6 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        openingWindow = new javax.swing.JFrame();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         addClass = new javax.swing.JFrame();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -71,6 +74,12 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable2 = new JTable(classAdderT);
         jButton8 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        warningWindow = new javax.swing.JDialog();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel33 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -114,71 +123,6 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
 
-        openingWindow.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        openingWindow.setMinimumSize(new java.awt.Dimension(376, 134));
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel7.setFont(new java.awt.Font("Unispace", 0, 14)); // NOI18N
-        jLabel7.setText("Student Mark Organizer");
-
-        jButton3.setText("Create New Class");
-
-        jButton4.setText("Edit Existing Class");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(jLabel7)
-                        .addGap(0, 96, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
-                .addContainerGap())
-        );
-
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton3, jButton4});
-
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout openingWindowLayout = new javax.swing.GroupLayout(openingWindow.getContentPane());
-        openingWindow.getContentPane().setLayout(openingWindowLayout);
-        openingWindowLayout.setHorizontalGroup(
-            openingWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(openingWindowLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        openingWindowLayout.setVerticalGroup(
-            openingWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(openingWindowLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         addClass.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addClass.setMinimumSize(new java.awt.Dimension(438, 317));
         addClass.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -220,6 +164,13 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Cancel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -228,15 +179,18 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel9)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton8)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel9)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton8)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -251,7 +205,9 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton8))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton8)
+                    .addComponent(jButton2)))
         );
 
         javax.swing.GroupLayout addClassLayout = new javax.swing.GroupLayout(addClass.getContentPane());
@@ -268,6 +224,74 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             .addGroup(addClassLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        warningWindow.setMaximumSize(new java.awt.Dimension(440, 170));
+        warningWindow.setMinimumSize(new java.awt.Dimension(440, 170));
+        warningWindow.setPreferredSize(new java.awt.Dimension(440, 170));
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Warning !"));
+
+        jLabel33.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel33.setText("Are You Sure You Want To Delete That Class?");
+
+        jButton5.setText("Yes");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("No");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel33))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton5, jButton6});
+
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jLabel33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout warningWindowLayout = new javax.swing.GroupLayout(warningWindow.getContentPane());
+        warningWindow.getContentPane().setLayout(warningWindowLayout);
+        warningWindowLayout.setHorizontalGroup(
+            warningWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(warningWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        warningWindowLayout.setVerticalGroup(
+            warningWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(warningWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -656,20 +680,6 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        FileSetup.getClasses(); // temporary start window button
-        try{
-            classes = FileSetup.classList();
-        } catch (IOException e){}
-        
-        for(String cls : classes){
-            classEdit.addElement(cls);
-        }
-        
-        openingWindow.setVisible(false);
-        this.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         this.setLocationRelativeTo(null);
     }//GEN-LAST:event_formWindowActivated
@@ -707,20 +717,8 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         if(jList1.isSelectionEmpty()){ // delete selected class
             System.out.println("Nothing is selected");
         } else{
-            int Index = jList1.getSelectedIndex();
-            String clas = jList1.getSelectedValue();
-            
-            try{
-            FileSetup.deleteClass(clas);
-            classes = ListEdits.removeAtIndex(classes, Index);
-            FileSetup.reWriteClass(classes);
-            } catch (IOException e){}
-            
-            classEdit.clear();
-            for(String cls : classes){
-                classEdit.addElement(cls);
-            }
-            //hey
+            warningWindow.setVisible(true);
+            this.setEnabled(false);
         }
         
        
@@ -793,6 +791,10 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         }
         
         addClass.setVisible(false);
+        jTextField1.setText("");
+        while (classAdderT.getRowCount() > 0){ // clear new class table
+            classAdderT.removeRow(classAdderT.getRowCount()-1);
+        }
         this.setVisible(true);
         }
         catch(IOException e){}
@@ -887,8 +889,40 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             qe.setVisible(true);
         }
     }//GEN-LAST:event_jLabel24MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+     //Stop adding new class
+     jTextField1.setText("");
+        while (classAdderT.getRowCount() > 0){ // clear new class table
+            classAdderT.removeRow(classAdderT.getRowCount()-1);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+            int Index = jList1.getSelectedIndex(); // User selects "I Am Sure", class is promptly deleted
+            String clas = jList1.getSelectedValue();
+            
+            try{
+            FileSetup.deleteClass(clas);
+            classes = ListEdits.removeAtIndex(classes, Index);
+            FileSetup.reWriteClass(classes);
+            } catch (IOException e){}
+            
+            classEdit.clear();
+            for(String cls : classes){
+                classEdit.addElement(cls);
+            }
+            warningWindow.setVisible(false);
+            this.setEnabled(true);
+            classSel = "placeholder";
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+     warningWindow.setVisible(false);
+     this.setEnabled(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
     
-    public static void reWriteMark(int pos1){
+    public static void reWriteMark(int pos1){ // edit marks and rewrite them to file
         int inttot = 0;
         int counter = 0;
         
@@ -904,7 +938,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         if(students[pos1][9].equals("0") && students[pos1][10].equals("0")){
             finals = ((Double.parseDouble(avg)));
         }
-        else if(!"0".equals(students[pos1][9]) && !"0".equals(students[pos1][10])){
+        else if(!"0".equals(students[pos1][9]) && !"0".equals(students[pos1][10])){ // different exam calculations depending on number of exams
             examOnly = Double.toString(Math.round((Double.parseDouble(students[pos1][9])*0.15) + (Double.parseDouble(students[pos1][10])*0.15)));
             finals = Math.round((Double.parseDouble(examOnly) + (Double.parseDouble(avg))*0.7));
         }else if(!"0".equals(students[pos1][9])){
@@ -923,7 +957,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         jLabel22.setText(students[pos1][7] + "%");
         jLabel24.setText(students[pos1][8] + "%");
         jLabel27.setText(students[pos1][9] + "%");
-        jLabel28.setText(students[pos1][10] + "%");        
+        jLabel28.setText(students[pos1][10] + "%");
         jLabel3.setText(students[pos1][0]);
         jLabel6.setText(students[pos1][1]);
         jLabel4.setText(Double.toString(finals));
@@ -958,7 +992,7 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MarkOrganizerUI().setVisible(false);
+                new MarkOrganizerUI().setVisible(true);
             }
         });
     }
@@ -968,8 +1002,9 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private static javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -997,23 +1032,23 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private static javax.swing.JLabel jLabel4;
     private static javax.swing.JLabel jLabel5;
     private static javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private static javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JFrame openingWindow;
+    private javax.swing.JDialog warningWindow;
     // End of variables declaration//GEN-END:variables
 }

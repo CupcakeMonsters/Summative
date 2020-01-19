@@ -1,2 +1,0 @@
-john,00smith,00 ,00 ,00 ,00 ,00 ,00 ,00 ,00 ,00 ,0null,0null,0null,0null,0null,0null,0null,0null,0null,0null, null, null, null, null, null, null, null, null, null, null
-john2,00smith2,091.0,00 ,00 ,00 ,00 ,00 ,00 ,00 ,00 ,0null,0null,0null,0null,0null,0null,0null,0null,0null,0null, null, null, null, null, null, null, null, null, null, null

@@ -39,4 +39,28 @@ public class ListEdits {
         
         return output;  
     }
+   
+    public static String[][] sortList(String[][] list){
+        int i = 0;
+        for (String[] tem : list) {
+            String[] min = tem;
+            int minId = i;
+                for (int j = i+1; j < list.length; j++) {
+                    String[] firstlastC = list[j][0].split(" ");
+                    String last = firstlastC[1];
+                    String[] firstlastM = min[0].split(" ");
+                    String lastComp = firstlastM[1];
+                    if (last.compareToIgnoreCase(lastComp) < 0) {
+                      min = list[j];
+                      minId = j;
+                    }
+                }
+            // swapping
+            String[] temp = list[i];
+            list[i] = min;
+            list[minId] = temp;
+            i++;
+            }
+            return list;
+    }
 }
