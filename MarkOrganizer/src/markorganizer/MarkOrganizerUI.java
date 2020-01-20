@@ -773,18 +773,19 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
         }
         //Saving the new class in a file
         try{
-        FileSetup.saveData(newClassName, tempStudents); // create class file with current students
-        
-        String[] tempClasses = new String[classes.length+1];
-        
-        for (int i = 0; i < classes.length; i++){ // add new class name to class list
-            tempClasses[i] = classes[i];
-        }
-        tempClasses[tempClasses.length-1] = newClassName;
-        classes=tempClasses;
-        FileSetup.reWriteClass(classes);
-        
-        classEdit.clear();
+            tempStudents = ListEdits.sortList(tempStudents);
+            FileSetup.saveData(newClassName, tempStudents); // create class file with current students
+
+            String[] tempClasses = new String[classes.length+1];
+
+            for (int i = 0; i < classes.length; i++){ // add new class name to class list
+                tempClasses[i] = classes[i];
+            }
+            tempClasses[tempClasses.length-1] = newClassName;
+            classes=tempClasses;
+            FileSetup.reWriteClass(classes);
+
+            classEdit.clear();
         
         for(String cls : classes){ // rewrite class list into file
             classEdit.addElement(cls);
