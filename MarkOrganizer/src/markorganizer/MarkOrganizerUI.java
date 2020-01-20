@@ -14,6 +14,7 @@ import javax.swing.*;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 import java.lang.*;
+import java.lang.ArithmeticException;
 
 public class MarkOrganizerUI extends javax.swing.JFrame {
     public static ArrayList<Double> testmarks = new ArrayList<Double>();
@@ -709,8 +710,13 @@ public class MarkOrganizerUI extends javax.swing.JFrame {
             String [] temp = {stud[0], stud[1]};
             tableTest.addRow(temp);
         }
-        jLabel32.setText(String.valueOf(qe.median(students)));
-        this.setVisible(true);
+        try{
+            jLabel32.setText(String.valueOf(qe.median(students)));
+        }
+        catch(ArithmeticException e){
+            jLabel32.setText("0");
+        }
+        
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
